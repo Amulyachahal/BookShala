@@ -1,6 +1,5 @@
 import Button from "@mui/material/Button";
-import React, { useContext, useEffect, useState } from "react";
-import { BookContext } from "../../Contexts/BookContext";
+import React, { useState } from "react";
 import styles from "./LoginPage.module.css";
 
 const LoginPage = () => {
@@ -14,7 +13,7 @@ const LoginPage = () => {
     try {
       const response = await fetch("/api/auth/login", {
         method: "POST",
-        headers: { "X-Content-Type-Options": "nosniff" },
+
         body: JSON.stringify(loginCreds),
       });
       const data = await response.json();

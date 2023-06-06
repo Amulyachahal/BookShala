@@ -1,5 +1,5 @@
 import React from "react";
-import ReactDOM from "react-dom";
+import { createRoot } from "react-dom/client";
 import "./index.css";
 import App from "./App";
 import { makeServer } from "./server";
@@ -9,13 +9,23 @@ import { BookProvider } from "./Contexts/BookContext";
 // Call make Server
 makeServer();
 
-ReactDOM.render(
+// ReactDOM.render(
+//   <React.StrictMode>
+//     <Router>
+//       <BookProvider>
+//         <App />
+//       </BookProvider>
+//     </Router>
+//   </React.StrictMode>,
+//   document.getElementById("root")
+// );
+
+createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <Router>
       <BookProvider>
         <App />
       </BookProvider>
     </Router>
-  </React.StrictMode>,
-  document.getElementById("root")
+  </React.StrictMode>
 );
