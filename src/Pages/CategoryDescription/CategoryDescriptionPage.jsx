@@ -7,13 +7,11 @@ import Button from "@mui/material/Button";
 const CategoryDescriptionPage = () => {
   const { state, dispatch } = useContext(BookContext);
   const { categoryId } = useParams();
-  //   console.log(state.books);
 
   const filteredCategory = state.books.filter(
     (book) => book.categoryName === categoryId
   );
 
-  // console.log(filterCategory);
   return (
     <>
       <NavBar />

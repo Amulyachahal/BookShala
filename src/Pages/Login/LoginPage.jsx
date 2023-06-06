@@ -7,7 +7,6 @@ const LoginPage = () => {
   const [password, setPassword] = useState("");
 
   const loginCreds = { email: email, password: password };
-  // console.log(JSON.stringify(loginCreds));
 
   const postLoginCreds = async () => {
     try {
@@ -22,9 +21,6 @@ const LoginPage = () => {
       console.error(error);
     }
   };
-  // useEffect(() => {
-  //   postLoginCreds();
-  // }, []);
 
   const handleSubmit = (e) => {
     e.preventDefault();

@@ -6,7 +6,6 @@ import Button from "@mui/material/Button";
 
 const NavBar = () => {
   const { state, dispatch } = useContext(BookContext);
-  console.log(state.loginCreds);
 
   const creds = {
     email: "adarshbalika@gmail.com",
@@ -19,7 +18,6 @@ const NavBar = () => {
       body: JSON.stringify(creds),
     });
     const { encodedToken } = await response.json();
-    console.log(encodedToken);
     localStorage.setItem("encodedToken", encodedToken);
   };
 

@@ -13,7 +13,7 @@ const SignupPage = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Perform signup logic here
+
     dispatch({
       type: "",
       payload_fname: fName,

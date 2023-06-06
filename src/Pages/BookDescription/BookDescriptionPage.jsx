@@ -8,8 +8,6 @@ const BookDescriptionPage = () => {
   const { productId } = useParams();
   const { state, dispatch } = useContext(BookContext);
   const bookDetail = state.books.find((book) => book.id === productId);
-  console.log(bookDetail);
-  // author category name id price title
   return (
     <>
       <NavBar />

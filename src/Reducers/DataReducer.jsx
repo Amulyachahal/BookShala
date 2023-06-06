@@ -82,13 +82,10 @@ export const DataReducer = (state, action) => {
     case "TOGGLE_PROFILE":
       return { ...state, toggleProfile: !state.toggleProfile };
 
-    //radio
-
     case "PRICE_lOW_TO_HIGH":
       if (action.payload) {
         const books =
           state.searchResults.length > 0 ? state.searchResults : state.books;
-        console.log(books);
         const sortedData = books.sort(
           (a, b) => Number(a.price) - Number(b.price)
         );
@@ -112,8 +109,6 @@ export const DataReducer = (state, action) => {
         };
       }
       break;
-
-    //checkbox
 
     case "CATEGORY_CHECKBOX":
       if (action.payload) {
