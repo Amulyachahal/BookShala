@@ -1,0 +1,42 @@
+.footerContainer {
+  background-color: #f4f4f4;
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.footerLeft {
+  display: flex;
+  flex-direction: column;
+}
+
+.footerRight {
+  display: flex;
+  flex-direction: column;
+}
+
+.footerLogo {
+  margin-bottom: 10px;
+  font-size: 24px;
+}
+
+.footerLinks {
+  margin-bottom: 10px;
+}
+
+.footerLink {
+  margin-bottom: 5px;
+  color: #333;
+  text-decoration: none;
+}
+
+.footerSocial {
+  display: flex;
+  flex-direction: column;
+}
+
+.footerSocialLink {
+  margin-bottom: 5px;
+  color: #333;
+  text-decoration: none;
+}

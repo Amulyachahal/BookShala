@@ -1,0 +1,50 @@
+.homeContainer {
+  text-align: center;
+}
+
+.homeImage {
+  width: 100%;
+  max-width: 400px;
+  border-radius: 50%;
+}
+
+.homeButton {
+  margin-top: 20px;
+}
+
+.homeCategories {
+  text-align: center;
+  margin-top: 40px;
+}
+
+.homeCategoryList {
+  display: flex;
+  justify-content: center;
+  list-style: none;
+}
+
+.homeCategoryItem {
+  text-align: center;
+  margin: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.homeCategoryItem h3 {
+  margin: 10px 0;
+}
+
+.homeCategoryItem p {
+  margin: 5px 0;
+}
+
+.homeCategoryCircle {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background-color: #f4f4f4;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
