@@ -23,14 +23,14 @@ const LoginPage = () => {
   };
 
   const handleSubmit = (e) => {
-    e.preventDefault();
+    // e.preventDefault();
     postLoginCreds();
   };
 
   return (
     <div className={styles.container}>
       <h2>Login</h2>
-      <form onSubmit={handleSubmit}>
+      <form>
         <div className={styles.formGroup}>
           <label htmlFor="email">Email:</label>
           <input
@@ -50,7 +50,9 @@ const LoginPage = () => {
           />
         </div>
         <div className={styles.formGroup}>
-          <Button variant="contained">Login</Button>
+          <Button onClick={(e) => handleSubmit(e)} variant="contained">
+            Login
+          </Button>{" "}
         </div>
       </form>
     </div>
