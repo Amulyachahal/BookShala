@@ -58,6 +58,7 @@ const LoginPage = () => {
 
   const testLoginHandeler = (e) => {
     dispatch({ type: "TEST_LOGIN" });
+    navigate("/");
     // console.log(localStorage.getItem("encodedToken"));
     postLoginCreds();
     dispatch({ type: "LOGIN" });
