@@ -1,6 +1,7 @@
 import React, { useContext, useState } from "react";
 import styles from "./SignupPage.module.css";
 import Button from "@mui/material/Button";
+import { useNavigate } from "react-router-dom";
 import { BookContext } from "../../Contexts/BookContext";
 
 const SignupPage = () => {
@@ -8,32 +9,59 @@ const SignupPage = () => {
   const [lName, setLName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const navigate = useNavigate();
+  const { dispatch } = useContext(BookContext);
+  const [responseData, setResponseData] = useState({});
 
-  const { state, dispatch } = useContext(BookContext);
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-
-    dispatch({
-      type: "",
-      payload_fname: fName,
-      payload_lname: lName,
-      payload_email: email,
-      payload_password: password,
-    });
+  const signupCreds = {
+    email: email,
+    password: password,
+    firstName: fName,
+    lastName: lName,
   };
 
-  console.log(state.signupCreds);
+  const postSignupCreds = async () => {
+    try {
+      const response = await fetch("/api/auth/signup", {
+        method: "POST",
+
+        body: JSON.stringify(signupCreds),
+      });
+      const data = await response.json();
+      console.log(data);
+      setResponseData(data);
+
+      localStorage.setItem("encodedToken", data.encodedToken);
+      navigate("/login");
+      dispatch({ type: "SIGNUP_USER", payload: data.createdUser });
+    } catch (error) {
+      console.error(error);
+      alert(error);
+    }
+  };
+
+  const handleSubmit = (e) => {
+    postSignupCreds();
+
+    setTimeout(() => {
+      if (responseData.createdUser) {
+        navigate("/login");
+      }
+      if (responseData.errors) {
+        alert(`${responseData.errors[0]}`);
+      }
+    }, 5000);
+  };
 
   return (
     <div className={styles.container}>
       <h2>Sign Up</h2>
-      <form onSubmit={handleSubmit}>
+      <form>
         <div className={styles.formGroup}>
           <label htmlFor="name">First Name:</label>
           <input
             type="text"
-            id="name"
+            id="fname"
             name="name"
             onChange={(e) => setFName(e.target.value)}
           />
@@ -42,7 +70,7 @@ const SignupPage = () => {
           <label htmlFor="name">Last Name:</label>
           <input
             type="text"
-            id="name"
+            id="lname"
             name="name"
             onChange={(e) => setLName(e.target.value)}
           />
@@ -66,7 +94,13 @@ const SignupPage = () => {
           />
         </div>
         <div className={styles.formGroup}>
-          <Button variant="contained">Sign Up</Button>
+          <Button onClick={(e) => handleSubmit(e)} variant="contained">
+            Sign Up
+          </Button>
+          <p></p>
+          <Button onClick={(e) => navigate("/login")} variant="contained">
+            already have an account ? login
+          </Button>
         </div>
       </form>
     </div>

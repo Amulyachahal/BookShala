@@ -1,25 +1,12 @@
 import React, { useContext } from "react";
-import { Navigate, NavLink } from "react-router-dom";
+import { Navigate, NavLink, useNavigate } from "react-router-dom";
 import { BookContext } from "../Contexts/BookContext";
 import styles from "./NavBar.module.css";
 import Button from "@mui/material/Button";
 
 const NavBar = () => {
   const { state, dispatch } = useContext(BookContext);
-
-  const creds = {
-    email: "adarshbalika@gmail.com",
-    password: "adarshbalika",
-  };
-
-  const getUser = async () => {
-    const response = await fetch("/api/auth/login", {
-      method: "POST",
-      body: JSON.stringify(creds),
-    });
-    const { encodedToken } = await response.json();
-    localStorage.setItem("encodedToken", encodedToken);
-  };
+  const navigate = useNavigate();
 
   return (
     <>
@@ -29,8 +16,7 @@ const NavBar = () => {
             <Button
               onClick={() => {
                 dispatch({ type: "LOGIN" });
-
-                getUser();
+                navigate("/login");
               }}
               size="small"
               variant="contained"

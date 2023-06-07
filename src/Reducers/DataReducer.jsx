@@ -26,7 +26,9 @@ export const DataReducer = (state, action) => {
         books: [...state.initialBooks],
       };
     case "ADD_TO_CART":
-      const cartData = state.books.filter((book) => book.id === action.payload);
+      const cartData = state.books.filter(
+        (book) => book._id === action.payload
+      );
 
       return {
         ...state,
@@ -38,7 +40,7 @@ export const DataReducer = (state, action) => {
 
     case "REMOVE_FROM_CART":
       const removeFromCart = state.cart.filter(
-        (book) => book.id !== action.payload
+        (book) => book._id !== action.payload
       );
       return {
         ...state,
@@ -55,7 +57,7 @@ export const DataReducer = (state, action) => {
 
     case "ADD_TO_WISHLIST":
       const wishlistData = state.books.filter(
-        (book) => book.id === action.payload
+        (book) => book._id === action.payload
       );
 
       return {
@@ -68,7 +70,7 @@ export const DataReducer = (state, action) => {
 
     case "REMOVE_FROM_WISHLIST":
       const removeFromWishlist = state.wishlist.filter(
-        (book) => book.id !== action.payload
+        (book) => book._id !== action.payload
       );
       return {
         ...state,
@@ -158,13 +160,20 @@ export const DataReducer = (state, action) => {
     case "SIGNUP_CREDS":
       return {
         ...state,
-        signupCreds: {
-          firstName: action.payload_fname,
-          lastName: action.payload_lname,
-          email: action.payload_email,
-          password: action.payload_password,
-        },
+        signupCreds: { ...action.payload },
       };
+
+    case "SIGNUP_USER":
+      return { ...state, signupUserCreds: { ...action.payload } };
+
+    case "TEST_LOGIN":
+      return {
+        ...state,
+        loginCreds: { email: "amulyachahal@gmail.com", password: "123456" },
+      };
+
+    case "RESET_USER":
+      return { ...state, cart: [], wishlist: [] };
 
     default:
       return { state };

@@ -6,6 +6,7 @@ import Button from "@mui/material/Button";
 const WishListPage = () => {
   const { state, dispatch } = useContext(BookContext);
   const wishlistCount = state.wishlist.length;
+  console.log(state.wishlist);
 
   return (
     <>
@@ -22,7 +23,7 @@ const WishListPage = () => {
               <div>{book.price}</div>
               <div>{/* <button>ADD TO CART</button> */}</div>
               <div>
-                {state.inCart[book.id] ? (
+                {state.inCart[book._id] ? (
                   <Button variant="outlined" disabled>
                     Added to Cart
                   </Button>
@@ -30,7 +31,7 @@ const WishListPage = () => {
                   <Button
                     variant="outlined"
                     onClick={() =>
-                      dispatch({ type: "ADD_TO_CART", payload: book.id })
+                      dispatch({ type: "ADD_TO_CART", payload: book._id })
                     }
                   >
                     ADD TO CART
@@ -39,7 +40,10 @@ const WishListPage = () => {
                 <Button
                   variant="outlined"
                   onClick={() =>
-                    dispatch({ type: "REMOVE_FROM_WISHLIST", payload: book.id })
+                    dispatch({
+                      type: "REMOVE_FROM_WISHLIST",
+                      payload: book._id,
+                    })
                   }
                 >
                   REMOVE FROM WISHLIST

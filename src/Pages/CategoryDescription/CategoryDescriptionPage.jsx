@@ -23,13 +23,13 @@ const CategoryDescriptionPage = () => {
             {filteredCategory.map(
               ({ author, categoryName, id, price, title, _id }, index) => (
                 <li key={index}>
-                  <NavLink to={`/productpage/${id}`}>
+                  <NavLink to={`/productpage/${_id}`}>
                     <div>{title}</div>
                     <div>{author}</div>
                     <div>{price}</div>
                   </NavLink>
                   <div>
-                    {state.inCart[id] ? (
+                    {state.inCart[_id] ? (
                       <NavLink to="/cart">
                         <Button variant="outlined">Go to Cart</Button>
                       </NavLink>
@@ -37,13 +37,13 @@ const CategoryDescriptionPage = () => {
                       <Button
                         variant="outlined"
                         onClick={() => {
-                          dispatch({ type: "ADD_TO_CART", payload: id });
+                          dispatch({ type: "ADD_TO_CART", payload: _id });
                         }}
                       >
                         ADD TO CART
                       </Button>
                     )}
-                    {state.inWishlist[id] ? (
+                    {state.inWishlist[_id] ? (
                       <NavLink to="/wishlist">
                         <Button variant="outlined">GO TO WISHLIST</Button>
                       </NavLink>
@@ -51,7 +51,7 @@ const CategoryDescriptionPage = () => {
                       <Button
                         variant="outlined"
                         onClick={() =>
-                          dispatch({ type: "ADD_TO_WISHLIST", payload: id })
+                          dispatch({ type: "ADD_TO_WISHLIST", payload: _id })
                         }
                       >
                         ADD TO WISHLIST

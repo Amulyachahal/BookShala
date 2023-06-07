@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import NavBar from "../../Components/NavBar";
 import { BookContext } from "../../Contexts/BookContext";
@@ -6,6 +6,7 @@ import Button from "@mui/material/Button";
 
 const CartPage = () => {
   const { state, dispatch } = useContext(BookContext);
+  console.log(state.cart);
 
   return (
     <>
@@ -24,14 +25,14 @@ const CartPage = () => {
                 <Button
                   variant="outlined"
                   onClick={() =>
-                    dispatch({ type: "REMOVE_FROM_CART", payload: book.id })
+                    dispatch({ type: "REMOVE_FROM_CART", payload: book._id })
                   }
                 >
                   REMOVE FROM CART
                 </Button>
               </div>
               <div>
-                {state.inWishlist[book.id] ? (
+                {state.inWishlist[book._id] ? (
                   <Button variant="outlined" disabled>
                     Added to Wishlist
                   </Button>
@@ -39,7 +40,7 @@ const CartPage = () => {
                   <Button
                     variant="outlined"
                     onClick={() =>
-                      dispatch({ type: "ADD_TO_WISHLIST", payload: book.id })
+                      dispatch({ type: "ADD_TO_WISHLIST", payload: book._id })
                     }
                   >
                     ADD TO WISHLIST
@@ -52,7 +53,7 @@ const CartPage = () => {
                   onClick={() =>
                     dispatch({
                       type: "INCREASE_CART_QUANTITY",
-                      payload: book.id,
+                      payload: book._id,
                     })
                   }
                 >
@@ -68,7 +69,7 @@ const CartPage = () => {
                     onClick={() =>
                       dispatch({
                         type: "DECREASE_CART_QUANTITY",
-                        payload: book.id,
+                        payload: book._id,
                       })
                     }
                   >

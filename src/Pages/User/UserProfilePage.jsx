@@ -20,8 +20,13 @@ const UserProfilePage = () => {
         {state.toggleProfile ? (
           <div>
             <h3>Profile Details</h3>
-            <div>Full Name: {}</div>
-            <div>Email: {}</div>
+            <div>
+              Full Name:{" "}
+              {state.signupUserCreds.firstName +
+                " " +
+                state.signupUserCreds.lastName}
+            </div>
+            <div>Email: {state.signupUserCreds.email}</div>
           </div>
         ) : (
           <div>

@@ -9,6 +9,36 @@ const AllProductsPage = () => {
   const books =
     state.searchResults.length > 0 ? state.searchResults : state.books;
 
+  const userToken = localStorage.getItem("encodedToken");
+  // console.log(state.cart);
+  console.log(state.wishlist);
+
+  const postAddToCartData = async (book) => {
+    try {
+      const response = await fetch("/api/user/cart", {
+        method: "POST",
+        headers: { authorization: userToken },
+        body: JSON.stringify(book),
+      });
+      const data = await response.json();
+      // console.log(data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+  const postAddToWishListData = async (book) => {
+    try {
+      const response = await fetch("/api/user/wishlist", {
+        method: "POST",
+        headers: { authorization: userToken },
+        body: JSON.stringify(book),
+      });
+      const data = await response.json();
+      // console.log(data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
   return (
     <>
       <NavBar />
@@ -93,16 +123,17 @@ const AllProductsPage = () => {
       </div>
       <div>
         <ul>
-          {books.map(
-            ({ author, categoryName, id, price, title, _id }, index) => (
+          {books.map((book, index) => {
+            const { author, categoryName, id, price, title, _id } = book;
+            return (
               <li key={index}>
-                <NavLink to={`/productpage/${id}`}>
+                <NavLink to={`/productpage/${_id}`}>
                   <div>{title}</div>
                   <div>{author}</div>
                   <div>{price}</div>
                 </NavLink>
                 <div>
-                  {state.inCart[id] ? (
+                  {state.inCart[_id] ? (
                     <NavLink to="/cart">
                       <Button variant="outlined">Go to Cart</Button>
                     </NavLink>
@@ -110,30 +141,32 @@ const AllProductsPage = () => {
                     <Button
                       variant="outlined"
                       onClick={() => {
-                        dispatch({ type: "ADD_TO_CART", payload: id });
+                        dispatch({ type: "ADD_TO_CART", payload: _id });
+                        postAddToCartData(book);
                       }}
                     >
                       ADD TO CART
                     </Button>
                   )}
-                  {state.inWishlist[id] ? (
+                  {state.inWishlist[_id] ? (
                     <NavLink to="/wishlist">
                       <Button variant="outlined">GO TO WISHLIST</Button>
                     </NavLink>
                   ) : (
                     <Button
                       variant="outlined"
-                      onClick={() =>
-                        dispatch({ type: "ADD_TO_WISHLIST", payload: id })
-                      }
+                      onClick={() => {
+                        dispatch({ type: "ADD_TO_WISHLIST", payload: _id });
+                        postAddToWishListData(book);
+                      }}
                     >
                       ADD TO WISHLIST
                     </Button>
                   )}
                 </div>
               </li>
-            )
-          )}
+            );
+          })}
         </ul>
       </div>
     </>

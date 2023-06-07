@@ -23,6 +23,7 @@ export const BookProvider = ({ children }) => {
     isLoggedIn: false,
     loginCreds: {},
     signupCreds: {},
+    signupUserCreds: {},
   });
 
   const fetchCategoriesData = async () => {
@@ -47,25 +48,26 @@ export const BookProvider = ({ children }) => {
     }
   };
 
-  //   const postCartData = async () => {
-  //     const response = await fetch("/api/user/cart", {});
-  //   };
+  const userToken = localStorage.getItem("encodedToken");
 
-  //   const fetchUsersData = async () => {
-  //     try {
-  //       const response = await fetch("/api/users");
-  //       const data = await response.json();
-  //       console.log(data);
-  //       //   dispatch({ type: "SET_INITIAL_CATEGORY_DATA", payload: data.categories });
-  //     } catch (error) {
-  //       console.error(error);
-  //     }
-  //   };
+  const fetchCartData = async () => {
+    try {
+      const response = await fetch("/api/user/cart", {
+        method: "GET",
+        headers: { authorization: userToken },
+      });
+      const data = await response.json();
+      dispatch({ type: "ADD_TO_CART", payload: data.cart });
+      console.log(data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   useEffect(() => {
     fetchCategoriesData();
     fetchBooksData();
-    // fetchUsersData();
+    fetchCartData();
   }, []);
 
   return (
