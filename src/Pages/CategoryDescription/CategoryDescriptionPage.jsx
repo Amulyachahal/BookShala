@@ -15,7 +15,7 @@ const CategoryDescriptionPage = () => {
   return (
     <>
       <NavBar />
-      <div>
+      <div style={{ backgroundColor: "#ededed" }}>
         <h1>{categoryId.toLocaleUpperCase()}</h1>
 
         <div>

@@ -13,36 +13,51 @@ const BookDescriptionPage = () => {
   return (
     <>
       <NavBar />
-      <div>
-        <div>Author : {bookDetail.author}</div>
-        <div>Category: {bookDetail.categoryName}</div>
-        <div>
-          {state.inCart[bookDetail._id] ? (
-            <Button variant="outlined" disabled>
-              Added to Cart
-            </Button>
-          ) : (
-            <Button
-              variant="outlined"
-              onClick={() => postAddToCartData(bookDetail)}
-            >
-              Add to Cart
-            </Button>
-          )}
-        </div>
-        <div>
-          {state.inWishlist[bookDetail._id] ? (
-            <Button variant="outlined" disabled>
-              Added to Wishlist
-            </Button>
-          ) : (
-            <Button
-              variant="outlined"
-              onClick={() => postAddToWishListData(bookDetail)}
-            >
-              Add to Wishlist
-            </Button>
-          )}
+      <div style={{ backgroundColor: "#ededed" }}>
+        <div
+          style={{
+            border: "solid 1px white",
+            boxShadow: "0 0 20px rgba(0, 0, 0, 0.1)",
+            borderRadius: "10px",
+            maxWidth: "15rem",
+            margin: "1rem",
+            padding: "0.5rem",
+            display: "inline-block",
+            backgroundColor: "#fff",
+          }}
+        >
+          <img src={bookDetail.image} />
+          <div>Author : {bookDetail.author}</div>
+          <div>Category: {bookDetail.categoryName}</div>
+          <div>
+            {state.inCart[bookDetail._id] ? (
+              <Button style={{ margin: "0.5rem" }} variant="outlined" disabled>
+                Added to Cart
+              </Button>
+            ) : (
+              <Button
+                style={{ margin: "0.5rem" }}
+                variant="outlined"
+                onClick={() => postAddToCartData(bookDetail)}
+              >
+                Add to Cart
+              </Button>
+            )}
+          </div>
+          <div>
+            {state.inWishlist[bookDetail._id] ? (
+              <Button variant="outlined" disabled>
+                Added to Wishlist
+              </Button>
+            ) : (
+              <Button
+                variant="outlined"
+                onClick={() => postAddToWishListData(bookDetail)}
+              >
+                Add to Wishlist
+              </Button>
+            )}
+          </div>
         </div>
       </div>
     </>

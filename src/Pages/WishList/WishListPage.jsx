@@ -18,49 +18,51 @@ const WishListPage = () => {
   }, []);
 
   return (
-    <>
+    <div style={{ backgroundColor: "#ededed" }}>
       <NavBar />
       <div>
-        <h1>My WishList: ({wishlistCount})</h1>
-      </div>
-      <div>
-        <ul>
-          {state.wishlist.map((book, index) => (
-            <li key={index}>
-              <div>{book.title}</div>
-              <div>{book.author}</div>
-              <div>{book.price}</div>
-              <div>
-                {state.inCart[book._id] ? (
-                  <Button variant="outlined" disabled>
-                    Added to Cart
-                  </Button>
-                ) : (
+        <div style={{ backgroundColor: "#ededed" }}>
+          <h1>My WishList: ({wishlistCount})</h1>
+        </div>
+        <div>
+          <ul>
+            {state.wishlist.map((book, index) => (
+              <li key={index}>
+                <div>{book.title}</div>
+                <div>{book.author}</div>
+                <div>{book.price}</div>
+                <div>
+                  {state.inCart[book._id] ? (
+                    <Button variant="outlined" disabled>
+                      Added to Cart
+                    </Button>
+                  ) : (
+                    <Button
+                      variant="outlined"
+                      onClick={() => postAddToCartData(book)}
+                    >
+                      ADD TO CART
+                    </Button>
+                  )}
                   <Button
                     variant="outlined"
-                    onClick={() => postAddToCartData(book)}
+                    onClick={() => {
+                      dispatch({
+                        type: "REMOVE_FROM_WISHLIST",
+                        payload: book._id,
+                      });
+                      deleteWishlistData(book._id);
+                    }}
                   >
-                    ADD TO CART
+                    REMOVE FROM WISHLIST
                   </Button>
-                )}
-                <Button
-                  variant="outlined"
-                  onClick={() => {
-                    dispatch({
-                      type: "REMOVE_FROM_WISHLIST",
-                      payload: book._id,
-                    });
-                    deleteWishlistData(book._id);
-                  }}
-                >
-                  REMOVE FROM WISHLIST
-                </Button>
-              </div>
-            </li>
-          ))}
-        </ul>
+                </div>
+              </li>
+            ))}
+          </ul>
+        </div>
       </div>
-    </>
+    </div>
   );
 };
 export default WishListPage;

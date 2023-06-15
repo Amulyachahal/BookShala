@@ -8,7 +8,7 @@ const CheckoutPage = () => {
   return (
     <>
       <NavBar />
-      <div>
+      <div style={{ backgroundColor: "#ededed" }}>
         <div>
           <div>
             <h3>Amulya Chahal</h3>

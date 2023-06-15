@@ -17,7 +17,7 @@ const NavBar = () => {
 
   return (
     <>
-      <nav className={styles.navbar}>
+      <nav className={styles.navbar} style={{ backgroundColor: "#ededed" }}>
         <div className={styles.navbarContainer}>
           <div>
             {state.isLoggedIn ? (
@@ -46,6 +46,7 @@ const NavBar = () => {
           </div>
 
           <input
+            style={{ margin: "24px auto", maxWidth: "20rem" }}
             onChange={(event) => {
               dispatch({ type: "SEARCH", payload: event.target.value });
             }}
@@ -58,6 +59,7 @@ const NavBar = () => {
           ) : (
             <NavLink to="/allproducts">
               <Button
+                style={{ margin: "0.5rem" }}
                 size="small"
                 variant="contained"
                 className={styles.navbarButton}

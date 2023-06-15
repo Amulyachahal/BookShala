@@ -8,10 +8,12 @@ const NoDataFound = () => {
   return (
     <>
       <NavBar />
-      <h1>Sorry, Products are not available for chosen category.</h1>{" "}
-      <NavLink to="/allproducts">
-        <p onClick={() => dispatch({ type: "RESET" })}>Browse Books</p>
-      </NavLink>
+      <div style={{ backgroundColor: "#ededed" }}>
+        <h1>Sorry, Products are not available for chosen category.</h1>{" "}
+        <NavLink to="/allproducts">
+          <p onClick={() => dispatch({ type: "RESET" })}>Browse Books</p>
+        </NavLink>
+      </div>
     </>
   );
 };
