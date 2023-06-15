@@ -5,14 +5,34 @@ import { BookContext } from "../../Contexts/BookContext";
 import Button from "@mui/material/Button";
 
 const CartPage = () => {
-  const { state, dispatch } = useContext(BookContext);
+  const { state, dispatch, fetchCartData } = useContext(BookContext);
+  // fetchCartData();
+
+  useEffect(() => {
+    fetchCartData();
+  }, []);
   console.log(state.cart);
+
+  const userToken = localStorage.getItem("encodedToken");
+
+  const deleteCartData = async (productId) => {
+    try {
+      const response = await fetch(`/api/user/cart/${productId}`, {
+        method: "DELETE",
+        headers: { authorization: userToken },
+      });
+      const data = await response.json();
+      console.log(data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   return (
     <>
       <NavBar />
       <div>
-        <h1>My Cart ({state.cartCount})</h1>
+        <h1>My Cart ({state.cart.length})</h1>
       </div>
       <div>
         <ul>
@@ -24,9 +44,10 @@ const CartPage = () => {
               <div>
                 <Button
                   variant="outlined"
-                  onClick={() =>
-                    dispatch({ type: "REMOVE_FROM_CART", payload: book._id })
-                  }
+                  onClick={() => {
+                    dispatch({ type: "REMOVE_FROM_CART", payload: book._id });
+                    deleteCartData(book._id);
+                  }}
                 >
                   REMOVE FROM CART
                 </Button>

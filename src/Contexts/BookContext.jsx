@@ -17,8 +17,6 @@ export const BookProvider = ({ children }) => {
     inCart: {},
     inWishlist: {},
     toggleProfile: true,
-    cartCount: 0,
-    wishlistCount: 0,
     noDataFound: false,
     isLoggedIn: false,
     loginCreds: {},
@@ -56,9 +54,26 @@ export const BookProvider = ({ children }) => {
         method: "GET",
         headers: { authorization: userToken },
       });
+      console.log(response);
       const data = await response.json();
-      dispatch({ type: "ADD_TO_CART", payload: data.cart });
+      // console.log(data);
+
+      dispatch({ type: "GET_CART_DATA", payload: data.cart });
+      // console.log(state.cart);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const fetchWishlistData = async () => {
+    try {
+      const response = await fetch("/api/user/wishlist", {
+        method: "GET",
+        headers: { authorization: userToken },
+      });
+      const data = await response.json();
       console.log(data);
+      dispatch({ type: "GET_WISHLIST_DATA", payload: data.wishlist });
     } catch (error) {
       console.error(error);
     }
@@ -67,11 +82,12 @@ export const BookProvider = ({ children }) => {
   useEffect(() => {
     fetchCategoriesData();
     fetchBooksData();
-    fetchCartData();
   }, []);
 
   return (
-    <BookContext.Provider value={{ state, dispatch }}>
+    <BookContext.Provider
+      value={{ state, dispatch, fetchCartData, fetchWishlistData }}
+    >
       {children}
     </BookContext.Provider>
   );

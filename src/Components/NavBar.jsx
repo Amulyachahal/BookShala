@@ -3,35 +3,61 @@ import { Navigate, NavLink, useNavigate } from "react-router-dom";
 import { BookContext } from "../Contexts/BookContext";
 import styles from "./NavBar.module.css";
 import Button from "@mui/material/Button";
+import TextField from "@mui/material/TextField";
 
 const NavBar = () => {
-  const { state, dispatch } = useContext(BookContext);
+  const { state, dispatch, fetchCartData, fetchWishlistData } = useContext(
+    BookContext
+  );
   const navigate = useNavigate();
+  const logoutHandeler = () => {
+    dispatch({ type: "LOGOUT" });
+    navigate("/login");
+    localStorage.clear();
+  };
 
   return (
     <>
       <nav className={styles.navbar}>
         <div className={styles.navbarContainer}>
           <div>
-            <Button
-              onClick={() => {
-                dispatch({ type: "LOGIN" });
-                navigate("/login");
-              }}
-              size="small"
-              variant="contained"
-            >
-              {state.isLoggedIn ? "Log Out" : "Log In"}
-            </Button>{" "}
+            {state.isLoggedIn ? (
+              <Button size="small" variant="contained" onClick={logoutHandeler}>
+                Logout
+              </Button>
+            ) : (
+              <Button
+                onClick={() => {
+                  dispatch({ type: "LOGIN" });
+                  navigate("/login");
+                }}
+                size="small"
+                variant="contained"
+              >
+                Login{" "}
+              </Button>
+            )}{" "}
             <NavLink to="/">
               <h1
-                className={styles.navbarTitle}
+                style={{ fontStyle: "italic", textDecoration: "none" }}
                 onClick={() => dispatch({ type: "RESET" })}
               >
                 BookShala
               </h1>
             </NavLink>
           </div>
+          {/* <div style={{ width: "40rem", marginLeft: "28rem" }}>
+            <TextField
+              id="fullWidth"
+              fullWidth
+              onChange={(event) => {
+                dispatch({ type: "SEARCH", payload: event.target.value });
+              }}
+              type="text"
+              placeholder="Search your favorite book"
+            />
+          </div> */}
+
           <input
             onChange={(event) => {
               dispatch({ type: "SEARCH", payload: event.target.value });
@@ -55,19 +81,25 @@ const NavBar = () => {
           )}
         </div>
         <NavLink
-          onClick={() => dispatch({ type: "RESET" })}
+          onClick={() => {
+            dispatch({ type: "RESET" });
+            fetchWishlistData();
+          }}
           to="/wishlist"
           className={styles.navbarLink}
         >
-          WishList ({state.wishlistCount})
+          WishList ({state.wishlist.length})
         </NavLink>{" "}
         ||{" "}
         <NavLink
-          onClick={() => dispatch({ type: "RESET" })}
+          onClick={() => {
+            // dispatch({ type: "RESET" });
+            fetchCartData();
+          }}
           to="/cart"
           className={styles.navbarLink}
         >
-          Cart ({state.cartCount})
+          Cart ({state.cart.length})
         </NavLink>{" "}
         ||{" "}
         <NavLink

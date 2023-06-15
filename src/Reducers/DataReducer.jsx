@@ -26,17 +26,19 @@ export const DataReducer = (state, action) => {
         books: [...state.initialBooks],
       };
     case "ADD_TO_CART":
-      const cartData = state.books.filter(
-        (book) => book._id === action.payload
-      );
+      //   const cartData = state.books.filter(
+      //     (book) => book._id === action.payload
+      //   );
 
       return {
         ...state,
         inCart: { ...state.inCart, [action.payload]: true },
-        cart: [...state.cart, ...cartData],
-        cartCount: state.cart.length + 1,
+        cart: [...state.cart, action.payload],
         noDataFound: false,
       };
+
+    case "GET_CART_DATA":
+      return { ...state, cart: action.payload };
 
     case "REMOVE_FROM_CART":
       const removeFromCart = state.cart.filter(
@@ -46,7 +48,6 @@ export const DataReducer = (state, action) => {
         ...state,
         inCart: { ...state.cart, [action.payload]: false },
         cart: [...removeFromCart],
-        cartCount: state.cart.length - 1,
         noDataFound: false,
       };
 
@@ -56,17 +57,19 @@ export const DataReducer = (state, action) => {
       return { ...state, cartProductCount: state.cartProductCount - 1 };
 
     case "ADD_TO_WISHLIST":
-      const wishlistData = state.books.filter(
-        (book) => book._id === action.payload
-      );
+      //   const wishlistData = state.books.filter(
+      //     (book) => book._id === action.payload
+      //   );
 
       return {
         ...state,
         inWishlist: { ...state.inWishlist, [action.payload]: true },
-        wishlist: [...state.wishlist, ...wishlistData],
-        wishlistCount: state.wishlist.length + 1,
+        wishlist: [...state.wishlist, action.payload],
         noDataFound: false,
       };
+
+    case "GET_WISHLIST_DATA":
+      return { ...state, wishlist: [...action.payload] };
 
     case "REMOVE_FROM_WISHLIST":
       const removeFromWishlist = state.wishlist.filter(
@@ -76,7 +79,6 @@ export const DataReducer = (state, action) => {
         ...state,
         inWishlist: { ...state.inWishlist, [action.payload]: false },
         wishlist: [...removeFromWishlist],
-        wishlistCount: state.wishlist.length - 1,
         noDataFound: false,
       };
     case "RESET":
@@ -146,6 +148,8 @@ export const DataReducer = (state, action) => {
       return { ...state, books: [...state.initialBooks] };
 
     case "LOGIN":
+      return { ...state, isLoggedIn: !state.isLoggedIn };
+    case "LOGOUT":
       return { ...state, isLoggedIn: !state.isLoggedIn };
 
     case "LOGIN_CREDS":

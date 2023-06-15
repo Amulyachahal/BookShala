@@ -1,5 +1,5 @@
 import Button from "@mui/material/Button";
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { BookContext } from "../../Contexts/BookContext";
 import styles from "./LoginPage.module.css";
@@ -21,47 +21,34 @@ const LoginPage = () => {
       });
 
       const data = await response.json();
-
-      // console.log(data);
+      console.log(data);
+      if (data.encodedToken) {
+      }
 
       setResponseData(data);
     } catch (error) {
       console.error(error);
     }
   };
-  postLoginCreds();
-
-  // useEffect(() => {
-  //   postLoginCreds();
-  // }, []);
 
   const loginHandeler = () => {
-    // postLoginCreds();
-    setTimeout(() => {
-      if (responseData.foundUser) {
-        dispatch({ type: "LOGIN" });
-        navigate("/");
-      }
-      if (responseData.errors) {
-        alert(`${responseData.errors[0]}`);
-      }
-    }, 1000);
+    postLoginCreds();
 
-    // if (responseData.foundUser) {
-    // }
-    // if (responseData.error) {
-    //   alert(`${responseData.errors[0]}`);
-    // }
+    if (responseData.foundUser) {
+      localStorage.setItem("encodedToken", responseData.encodedToken);
 
-    // console.log(userToken);
+      dispatch({ type: "LOGIN" });
+      navigate("/");
+    }
+    if (responseData.errors) {
+      alert(`${responseData.errors[0]}`);
+    }
   };
 
   const testLoginHandeler = (e) => {
-    dispatch({ type: "TEST_LOGIN" });
-    navigate("/");
-    // console.log(localStorage.getItem("encodedToken"));
-    postLoginCreds();
+    // dispatch({ type: "TEST_LOGIN" });
     dispatch({ type: "LOGIN" });
+    navigate("/");
   };
 
   return (

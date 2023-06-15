@@ -28,12 +28,13 @@ const SignupPage = () => {
         body: JSON.stringify(signupCreds),
       });
       const data = await response.json();
-      console.log(data);
+      console.log(data.encodedToken);
       setResponseData(data);
-
-      localStorage.setItem("encodedToken", data.encodedToken);
-      navigate("/login");
-      dispatch({ type: "SIGNUP_USER", payload: data.createdUser });
+      if (data.encodedToken) {
+        // navigate("/login");
+        console.log(data);
+        dispatch({ type: "SIGNUP_USER", payload: data.createdUser });
+      }
     } catch (error) {
       console.error(error);
       alert(error);
@@ -50,7 +51,7 @@ const SignupPage = () => {
       if (responseData.errors) {
         alert(`${responseData.errors[0]}`);
       }
-    }, 5000);
+    }, 2000);
   };
 
   return (

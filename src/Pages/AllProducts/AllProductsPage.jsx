@@ -3,6 +3,7 @@ import { NavLink } from "react-router-dom";
 import NavBar from "../../Components/NavBar";
 import { BookContext } from "../../Contexts/BookContext";
 import Button from "@mui/material/Button";
+import { v4 as uuid } from "uuid";
 
 const AllProductsPage = () => {
   const { state, dispatch } = useContext(BookContext);
@@ -11,29 +12,35 @@ const AllProductsPage = () => {
 
   const userToken = localStorage.getItem("encodedToken");
   // console.log(state.cart);
-  console.log(state.wishlist);
+  // console.log(state.wishlist);
 
   const postAddToCartData = async (book) => {
+    const product = { product: { ...book } };
     try {
       const response = await fetch("/api/user/cart", {
         method: "POST",
         headers: { authorization: userToken },
-        body: JSON.stringify(book),
+        body: JSON.stringify(product),
       });
       const data = await response.json();
-      // console.log(data);
+      dispatch({ type: "ADD_TO_CART", payload: data.cart });
+      console.log(data);
     } catch (error) {
       console.error(error);
     }
   };
   const postAddToWishListData = async (book) => {
+    const product = { product: { ...book } };
+
     try {
       const response = await fetch("/api/user/wishlist", {
         method: "POST",
         headers: { authorization: userToken },
-        body: JSON.stringify(book),
+        body: JSON.stringify(product),
       });
       const data = await response.json();
+      dispatch({ type: "ADD_TO_WISHLIST", payload: data.wishlist });
+
       // console.log(data);
     } catch (error) {
       console.error(error);

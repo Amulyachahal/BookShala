@@ -1,12 +1,30 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import NavBar from "../../Components/NavBar";
 import { BookContext } from "../../Contexts/BookContext";
 import Button from "@mui/material/Button";
 
 const WishListPage = () => {
-  const { state, dispatch } = useContext(BookContext);
+  const { state, dispatch, fetchWishlistData } = useContext(BookContext);
   const wishlistCount = state.wishlist.length;
-  console.log(state.wishlist);
+
+  useEffect(() => {
+    fetchWishlistData();
+  }, []);
+
+  const userToken = localStorage.getItem("encodedToken");
+
+  const deleteWishlistData = async (productId) => {
+    try {
+      const response = await fetch(`/api/user/wishlist/${productId}`, {
+        method: "DELETE",
+        headers: { authorization: userToken },
+      });
+      const data = await response.json();
+      console.log(data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   return (
     <>
@@ -39,12 +57,13 @@ const WishListPage = () => {
                 )}
                 <Button
                   variant="outlined"
-                  onClick={() =>
+                  onClick={() => {
                     dispatch({
                       type: "REMOVE_FROM_WISHLIST",
                       payload: book._id,
-                    })
-                  }
+                    });
+                    deleteWishlistData(book._id);
+                  }}
                 >
                   REMOVE FROM WISHLIST
                 </Button>
