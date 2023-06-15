@@ -6,7 +6,9 @@ import Button from "@mui/material/Button";
 
 const BookDescriptionPage = () => {
   const { productId } = useParams();
-  const { state, dispatch } = useContext(BookContext);
+  const { state, postAddToCartData, postAddToWishListData } = useContext(
+    BookContext
+  );
   const bookDetail = state.books.find((book) => book._id === productId);
   return (
     <>
@@ -22,9 +24,7 @@ const BookDescriptionPage = () => {
           ) : (
             <Button
               variant="outlined"
-              onClick={() =>
-                dispatch({ type: "ADD_TO_CART", payload: bookDetail._id })
-              }
+              onClick={() => postAddToCartData(bookDetail)}
             >
               Add to Cart
             </Button>
@@ -38,12 +38,7 @@ const BookDescriptionPage = () => {
           ) : (
             <Button
               variant="outlined"
-              onClick={() =>
-                dispatch({
-                  type: "ADD_TO_WISHLIST",
-                  payload: bookDetail._id,
-                })
-              }
+              onClick={() => postAddToWishListData(bookDetail)}
             >
               Add to Wishlist
             </Button>

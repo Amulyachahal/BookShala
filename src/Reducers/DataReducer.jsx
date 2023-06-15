@@ -26,14 +26,9 @@ export const DataReducer = (state, action) => {
         books: [...state.initialBooks],
       };
     case "ADD_TO_CART":
-      //   const cartData = state.books.filter(
-      //     (book) => book._id === action.payload
-      //   );
-
       return {
         ...state,
-        inCart: { ...state.inCart, [action.payload]: true },
-        cart: [...state.cart, action.payload],
+        inCart: { ...state.inCart, [action.payload_id]: true },
         noDataFound: false,
       };
 
@@ -46,7 +41,7 @@ export const DataReducer = (state, action) => {
       );
       return {
         ...state,
-        inCart: { ...state.cart, [action.payload]: false },
+        inCart: { ...state.inCart, [action.payload_id]: false },
         cart: [...removeFromCart],
         noDataFound: false,
       };
@@ -57,14 +52,9 @@ export const DataReducer = (state, action) => {
       return { ...state, cartProductCount: state.cartProductCount - 1 };
 
     case "ADD_TO_WISHLIST":
-      //   const wishlistData = state.books.filter(
-      //     (book) => book._id === action.payload
-      //   );
-
       return {
         ...state,
-        inWishlist: { ...state.inWishlist, [action.payload]: true },
-        wishlist: [...state.wishlist, action.payload],
+        inWishlist: { ...state.inWishlist, [action.payload_id]: true },
         noDataFound: false,
       };
 
@@ -77,7 +67,7 @@ export const DataReducer = (state, action) => {
       );
       return {
         ...state,
-        inWishlist: { ...state.inWishlist, [action.payload]: false },
+        inWishlist: { ...state.inWishlist, [action.payload_id]: false },
         wishlist: [...removeFromWishlist],
         noDataFound: false,
       };

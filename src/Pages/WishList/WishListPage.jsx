@@ -4,27 +4,18 @@ import { BookContext } from "../../Contexts/BookContext";
 import Button from "@mui/material/Button";
 
 const WishListPage = () => {
-  const { state, dispatch, fetchWishlistData } = useContext(BookContext);
+  const {
+    state,
+    dispatch,
+    postAddToCartData,
+    fetchWishlistData,
+    deleteWishlistData,
+  } = useContext(BookContext);
   const wishlistCount = state.wishlist.length;
 
   useEffect(() => {
     fetchWishlistData();
   }, []);
-
-  const userToken = localStorage.getItem("encodedToken");
-
-  const deleteWishlistData = async (productId) => {
-    try {
-      const response = await fetch(`/api/user/wishlist/${productId}`, {
-        method: "DELETE",
-        headers: { authorization: userToken },
-      });
-      const data = await response.json();
-      console.log(data);
-    } catch (error) {
-      console.error(error);
-    }
-  };
 
   return (
     <>
@@ -39,7 +30,6 @@ const WishListPage = () => {
               <div>{book.title}</div>
               <div>{book.author}</div>
               <div>{book.price}</div>
-              <div>{/* <button>ADD TO CART</button> */}</div>
               <div>
                 {state.inCart[book._id] ? (
                   <Button variant="outlined" disabled>
@@ -48,9 +38,7 @@ const WishListPage = () => {
                 ) : (
                   <Button
                     variant="outlined"
-                    onClick={() =>
-                      dispatch({ type: "ADD_TO_CART", payload: book._id })
-                    }
+                    onClick={() => postAddToCartData(book)}
                   >
                     ADD TO CART
                   </Button>

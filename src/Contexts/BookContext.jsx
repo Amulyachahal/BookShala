@@ -38,7 +38,6 @@ export const BookProvider = ({ children }) => {
     try {
       const response = await fetch("/api/products");
       const data = await response.json();
-      //   console.log(data);
       dispatch({ type: "SET_INITIAL_PRODUCT_DATA", payload: data.products });
       dispatch({ type: "SET_PRODUCT_DATA", payload: data.products });
     } catch (error) {
@@ -54,12 +53,9 @@ export const BookProvider = ({ children }) => {
         method: "GET",
         headers: { authorization: userToken },
       });
-      console.log(response);
       const data = await response.json();
-      // console.log(data);
 
       dispatch({ type: "GET_CART_DATA", payload: data.cart });
-      // console.log(state.cart);
     } catch (error) {
       console.error(error);
     }
@@ -72,8 +68,70 @@ export const BookProvider = ({ children }) => {
         headers: { authorization: userToken },
       });
       const data = await response.json();
-      console.log(data);
       dispatch({ type: "GET_WISHLIST_DATA", payload: data.wishlist });
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const postAddToCartData = async (book) => {
+    const product = { product: { ...book } };
+    try {
+      const response = await fetch("/api/user/cart", {
+        method: "POST",
+        headers: { authorization: userToken },
+        body: JSON.stringify(product),
+      });
+      const data = await response.json();
+      dispatch({
+        type: "ADD_TO_CART",
+        payload_id: book._id,
+      });
+      fetchCartData();
+    } catch (error) {
+      console.error(error);
+    }
+  };
+  const postAddToWishListData = async (book) => {
+    const product = { product: { ...book } };
+
+    try {
+      const response = await fetch("/api/user/wishlist", {
+        method: "POST",
+        headers: { authorization: userToken },
+        body: JSON.stringify(product),
+      });
+      const data = await response.json();
+      dispatch({ type: "ADD_TO_WISHLIST", payload_id: book._id });
+      fetchWishlistData();
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const deleteCartData = async (productId) => {
+    try {
+      const response = await fetch(`/api/user/cart/${productId}`, {
+        method: "DELETE",
+        headers: { authorization: userToken },
+      });
+      dispatch({ type: "REMOVE_FROM_CART", payload_id: productId });
+      const data = await response.json();
+      console.log(data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const deleteWishlistData = async (productId) => {
+    try {
+      const response = await fetch(`/api/user/wishlist/${productId}`, {
+        method: "DELETE",
+        headers: { authorization: userToken },
+      });
+      const data = await response.json();
+      dispatch({ type: "REMOVE_FROM_WISHLIST", payload_id: productId });
+      console.log(data);
     } catch (error) {
       console.error(error);
     }
@@ -86,7 +144,16 @@ export const BookProvider = ({ children }) => {
 
   return (
     <BookContext.Provider
-      value={{ state, dispatch, fetchCartData, fetchWishlistData }}
+      value={{
+        state,
+        dispatch,
+        postAddToCartData,
+        fetchCartData,
+        postAddToWishListData,
+        fetchWishlistData,
+        deleteCartData,
+        deleteWishlistData,
+      }}
     >
       {children}
     </BookContext.Provider>

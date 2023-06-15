@@ -5,7 +5,7 @@ import { BookContext } from "../../Contexts/BookContext";
 import styles from "./LoginPage.module.css";
 
 const LoginPage = () => {
-  const { dispatch } = useContext(BookContext);
+  const { state, dispatch } = useContext(BookContext);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [responseData, setResponseData] = useState({});
@@ -21,7 +21,7 @@ const LoginPage = () => {
       });
 
       const data = await response.json();
-      console.log(data);
+      // console.log(data);
       if (data.encodedToken) {
       }
 

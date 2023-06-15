@@ -28,11 +28,8 @@ const SignupPage = () => {
         body: JSON.stringify(signupCreds),
       });
       const data = await response.json();
-      console.log(data.encodedToken);
       setResponseData(data);
       if (data.encodedToken) {
-        // navigate("/login");
-        console.log(data);
         dispatch({ type: "SIGNUP_USER", payload: data.createdUser });
       }
     } catch (error) {
@@ -51,7 +48,7 @@ const SignupPage = () => {
       if (responseData.errors) {
         alert(`${responseData.errors[0]}`);
       }
-    }, 2000);
+    }, 1000);
   };
 
   return (

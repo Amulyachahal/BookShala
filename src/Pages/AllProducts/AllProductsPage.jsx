@@ -1,51 +1,21 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import NavBar from "../../Components/NavBar";
 import { BookContext } from "../../Contexts/BookContext";
 import Button from "@mui/material/Button";
-import { v4 as uuid } from "uuid";
 
 const AllProductsPage = () => {
-  const { state, dispatch } = useContext(BookContext);
+  const {
+    state,
+    dispatch,
+    postAddToCartData,
+    postAddToWishListData,
+  } = useContext(BookContext);
   const books =
     state.searchResults.length > 0 ? state.searchResults : state.books;
 
-  const userToken = localStorage.getItem("encodedToken");
-  // console.log(state.cart);
-  // console.log(state.wishlist);
+  console.log("Cart: ", state.cart, "Wishlist: ", state.wishlist);
 
-  const postAddToCartData = async (book) => {
-    const product = { product: { ...book } };
-    try {
-      const response = await fetch("/api/user/cart", {
-        method: "POST",
-        headers: { authorization: userToken },
-        body: JSON.stringify(product),
-      });
-      const data = await response.json();
-      dispatch({ type: "ADD_TO_CART", payload: data.cart });
-      console.log(data);
-    } catch (error) {
-      console.error(error);
-    }
-  };
-  const postAddToWishListData = async (book) => {
-    const product = { product: { ...book } };
-
-    try {
-      const response = await fetch("/api/user/wishlist", {
-        method: "POST",
-        headers: { authorization: userToken },
-        body: JSON.stringify(product),
-      });
-      const data = await response.json();
-      dispatch({ type: "ADD_TO_WISHLIST", payload: data.wishlist });
-
-      // console.log(data);
-    } catch (error) {
-      console.error(error);
-    }
-  };
   return (
     <>
       <NavBar />
@@ -148,7 +118,6 @@ const AllProductsPage = () => {
                     <Button
                       variant="outlined"
                       onClick={() => {
-                        dispatch({ type: "ADD_TO_CART", payload: _id });
                         postAddToCartData(book);
                       }}
                     >
@@ -163,7 +132,6 @@ const AllProductsPage = () => {
                     <Button
                       variant="outlined"
                       onClick={() => {
-                        dispatch({ type: "ADD_TO_WISHLIST", payload: _id });
                         postAddToWishListData(book);
                       }}
                     >
