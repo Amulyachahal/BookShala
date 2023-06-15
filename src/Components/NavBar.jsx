@@ -35,9 +35,9 @@ const NavBar = () => {
                 Login{" "}
               </Button>
             )}{" "}
-            <NavLink to="/">
+            <NavLink style={{ textDecoration: "none" }} to="/">
               <h1
-                style={{ fontStyle: "italic", textDecoration: "none" }}
+                style={{ fontStyle: "italic", color: "#2196f3" }}
                 onClick={() => dispatch({ type: "RESET" })}
               >
                 BookShala
@@ -70,6 +70,14 @@ const NavBar = () => {
           )}
         </div>
         <NavLink
+          style={{
+            textDecoration: "none",
+            fontWeight: "bold",
+            color: "white",
+            backgroundColor: "#2196f3",
+            padding: "0.3rem 0.3rem",
+            borderRadius: "5px",
+          }}
           onClick={() => {
             dispatch({ type: "RESET" });
             fetchWishlistData();
@@ -81,6 +89,14 @@ const NavBar = () => {
         </NavLink>{" "}
         ||{" "}
         <NavLink
+          style={{
+            textDecoration: "none",
+            fontWeight: "bold",
+            color: "white",
+            backgroundColor: "#2196f3",
+            padding: "0.3rem 0.3rem",
+            borderRadius: "5px",
+          }}
           onClick={() => {
             fetchCartData();
           }}
@@ -91,6 +107,14 @@ const NavBar = () => {
         </NavLink>{" "}
         ||{" "}
         <NavLink
+          style={{
+            textDecoration: "none",
+            fontWeight: "bold",
+            color: "white",
+            backgroundColor: "#2196f3",
+            padding: "0.3rem 0.3rem",
+            borderRadius: "5px",
+          }}
           onClick={() => dispatch({ type: "RESET" })}
           to="/userprofile"
           className={styles.navbarLink}

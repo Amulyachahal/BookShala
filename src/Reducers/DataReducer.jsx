@@ -160,11 +160,11 @@ export const DataReducer = (state, action) => {
     case "SIGNUP_USER":
       return { ...state, signupUserCreds: { ...action.payload } };
 
-    case "TEST_LOGIN":
-      return {
-        ...state,
-        loginCreds: { email: "amulyachahal@gmail.com", password: "123456" },
-      };
+    // case "TEST_LOGIN":
+    //   return {
+    //     ...state,
+    //     loginCreds: { email: "amulyachahal@gmail.com", password: "123456" },
+    //   };
 
     case "RESET_USER":
       return { ...state, cart: [], wishlist: [] };

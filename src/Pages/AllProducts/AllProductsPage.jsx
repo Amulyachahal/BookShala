@@ -3,6 +3,7 @@ import { NavLink } from "react-router-dom";
 import NavBar from "../../Components/NavBar";
 import { BookContext } from "../../Contexts/BookContext";
 import Button from "@mui/material/Button";
+import { useNavigate } from "react-router-dom";
 
 const AllProductsPage = () => {
   const {
@@ -11,88 +12,93 @@ const AllProductsPage = () => {
     postAddToCartData,
     postAddToWishListData,
   } = useContext(BookContext);
+
+  const navigate = useNavigate();
+
   const books =
     state.searchResults.length > 0 ? state.searchResults : state.books;
 
   return (
     <>
       <NavBar />
-      <h1>All Books</h1>
       <div style={{ backgroundColor: "#ededed" }}>
-        <div>
-          <fieldset>
-            <legend>Sort By </legend>
-            <div>
-              <input
-                name="sortPrice"
-                type="radio"
-                onChange={(event) =>
-                  dispatch({
-                    type: "PRICE_lOW_TO_HIGH",
-                    payload: event.target.checked,
-                  })
-                }
-              />
-              <label>price - low to high</label>
-              <input
-                name="sortPrice"
-                type="radio"
-                onChange={(event) =>
-                  dispatch({
-                    type: "PRICE_HIGH_TO_LOW",
-                    payload: event.target.checked,
-                  })
-                }
-              />{" "}
-              <label>price - high to low</label>
-            </div>
-          </fieldset>
-        </div>
-        <div>
-          <fieldset>
-            <legend>Filters </legend>
-            <div>
-              <input
-                type="checkbox"
-                value="fiction"
-                name="fiction"
-                onClick={(event) =>
-                  dispatch({
-                    type: "CATEGORY_CHECKBOX",
-                    payload: event.target.checked,
-                    value: event.target.value,
-                  })
-                }
-              />
-              <label>Fiction</label>
-              <input
-                type="checkbox"
-                name="horror"
-                value="horror"
-                onClick={(event) =>
-                  dispatch({
-                    type: "CATEGORY_CHECKBOX",
-                    payload: event.target.checked,
-                    value: event.target.value,
-                  })
-                }
-              />
-              <label>Horror</label>
-              <input
-                type="checkbox"
-                name="non-fiction"
-                value="non-fiction"
-                onClick={(event) =>
-                  dispatch({
-                    type: "CATEGORY_CHECKBOX",
-                    payload: event.target.checked,
-                    value: event.target.value,
-                  })
-                }
-              />
-              <label>Non-fiction</label>
-            </div>
-          </fieldset>
+        <h1>All Books</h1>
+        <div style={{ display: "inline-block" }}>
+          <div>
+            <fieldset>
+              <legend>Sort By </legend>
+              <div>
+                <input
+                  name="sortPrice"
+                  type="radio"
+                  onChange={(event) =>
+                    dispatch({
+                      type: "PRICE_lOW_TO_HIGH",
+                      payload: event.target.checked,
+                    })
+                  }
+                />
+                <label>price - low to high</label>
+                <input
+                  name="sortPrice"
+                  type="radio"
+                  onChange={(event) =>
+                    dispatch({
+                      type: "PRICE_HIGH_TO_LOW",
+                      payload: event.target.checked,
+                    })
+                  }
+                />{" "}
+                <label>price - high to low</label>
+              </div>
+            </fieldset>
+          </div>
+          <div>
+            <fieldset>
+              <legend>Filters </legend>
+              <div>
+                <input
+                  type="checkbox"
+                  value="fiction"
+                  name="fiction"
+                  onClick={(event) =>
+                    dispatch({
+                      type: "CATEGORY_CHECKBOX",
+                      payload: event.target.checked,
+                      value: event.target.value,
+                    })
+                  }
+                />
+                <label>Fiction</label>
+                <input
+                  type="checkbox"
+                  name="horror"
+                  value="horror"
+                  onClick={(event) =>
+                    dispatch({
+                      type: "CATEGORY_CHECKBOX",
+                      payload: event.target.checked,
+                      value: event.target.value,
+                    })
+                  }
+                />
+                <label>Horror</label>
+                <input
+                  type="checkbox"
+                  name="non-fiction"
+                  value="non-fiction"
+                  onClick={(event) =>
+                    dispatch({
+                      type: "CATEGORY_CHECKBOX",
+                      payload: event.target.checked,
+                      value: event.target.value,
+                    })
+                  }
+                />
+                <label>Non-fiction</label>
+              </div>
+            </fieldset>
+          </div>
           <Button variant="contained" onClick={() => window.location.reload()}>
             Clear Filters
           </Button>
@@ -141,7 +147,9 @@ const AllProductsPage = () => {
                         style={{ margin: "0.5rem" }}
                         variant="outlined"
                         onClick={() => {
-                          postAddToCartData(book);
+                          state.isLoggedIn
+                            ? postAddToCartData(book)
+                            : navigate("/login");
                         }}
                       >
                         ADD TO CART
@@ -155,7 +163,9 @@ const AllProductsPage = () => {
                       <Button
                         variant="outlined"
                         onClick={() => {
-                          postAddToWishListData(book);
+                          state.isLoggedIn
+                            ? postAddToWishListData(book)
+                            : navigate("/login");
                         }}
                       >
                         ADD TO WISHLIST

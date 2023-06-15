@@ -10,20 +10,23 @@ const LoginPage = () => {
   const [password, setPassword] = useState("");
   const [responseData, setResponseData] = useState({});
   const navigate = useNavigate();
+
   const loginCreds = { email: email, password: password };
 
-  const postLoginCreds = async () => {
+  const testLoginCreds = {
+    email: "amulyachahal@gmail.com",
+    password: "123456",
+  };
+
+  const postLoginCreds = async (creds) => {
     try {
       const response = await fetch("/api/auth/login", {
         method: "POST",
 
-        body: JSON.stringify(loginCreds),
+        body: JSON.stringify(creds),
       });
 
       const data = await response.json();
-      // console.log(data);
-      if (data.encodedToken) {
-      }
 
       setResponseData(data);
     } catch (error) {
@@ -32,7 +35,7 @@ const LoginPage = () => {
   };
 
   const loginHandeler = () => {
-    postLoginCreds();
+    postLoginCreds(loginCreds);
 
     if (responseData.foundUser) {
       localStorage.setItem("encodedToken", responseData.encodedToken);
@@ -46,9 +49,17 @@ const LoginPage = () => {
   };
 
   const testLoginHandeler = (e) => {
-    // dispatch({ type: "TEST_LOGIN" });
-    dispatch({ type: "LOGIN" });
-    navigate("/");
+    postLoginCreds(testLoginCreds);
+
+    if (responseData.foundUser) {
+      localStorage.setItem("encodedToken", responseData.encodedToken);
+
+      dispatch({ type: "LOGIN" });
+      navigate("/");
+    }
+    if (responseData.errors) {
+      alert(`${responseData.errors[0]}`);
+    }
   };
 
   return (

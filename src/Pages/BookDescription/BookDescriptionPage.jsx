@@ -1,14 +1,17 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import NavBar from "../../Components/NavBar";
 import { BookContext } from "../../Contexts/BookContext";
 import Button from "@mui/material/Button";
+import { useNavigate } from "react-router-dom";
 
 const BookDescriptionPage = () => {
+  const navigate = useNavigate();
   const { productId } = useParams();
   const { state, postAddToCartData, postAddToWishListData } = useContext(
     BookContext
   );
+
   const bookDetail = state.books.find((book) => book._id === productId);
   return (
     <>
@@ -38,7 +41,11 @@ const BookDescriptionPage = () => {
               <Button
                 style={{ margin: "0.5rem" }}
                 variant="outlined"
-                onClick={() => postAddToCartData(bookDetail)}
+                onClick={
+                  state.isLoggedIn
+                    ? () => postAddToCartData(bookDetail)
+                    : navigate("/login")
+                }
               >
                 Add to Cart
               </Button>
@@ -52,7 +59,11 @@ const BookDescriptionPage = () => {
             ) : (
               <Button
                 variant="outlined"
-                onClick={() => postAddToWishListData(bookDetail)}
+                onClick={
+                  state.isLoggedIn
+                    ? () => postAddToWishListData(bookDetail)
+                    : navigate("/login")
+                }
               >
                 Add to Wishlist
               </Button>
