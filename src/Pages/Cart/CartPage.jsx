@@ -3,7 +3,7 @@ import { NavLink } from "react-router-dom";
 import NavBar from "../../Components/NavBar";
 import { BookContext } from "../../Contexts/BookContext";
 import Button from "@mui/material/Button";
-import generalbgimage from "../../Images/BackgroundImage/generalbgimage.jpg";
+import landingbgimage from "../../Images/BackgroundImage/landingbgimage.jpg";
 
 const CartPage = () => {
   const {
@@ -19,7 +19,7 @@ const CartPage = () => {
   }, []);
 
   return (
-    <div style={{ backgroundImage: `url(${generalbgimage})` }}>
+    <div style={{ backgroundImage: `url(${landingbgimage})` }}>
       <NavBar />
       <div>
         <div>

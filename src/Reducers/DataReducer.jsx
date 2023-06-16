@@ -25,6 +25,16 @@ export const DataReducer = (state, action) => {
         searchResults: [],
         books: [...state.initialBooks],
       };
+
+    case "SEARCH_CATEGORY":
+      //   const categoryData = state.categories.filter(
+      //     (category) => category.categoryName === action.payload
+      //   );
+      const categoryBooks = state.books.filter(
+        (book) => book.categoryName === action.payload
+      );
+      return { ...state, books: [...categoryBooks] };
+
     case "ADD_TO_CART":
       return {
         ...state,

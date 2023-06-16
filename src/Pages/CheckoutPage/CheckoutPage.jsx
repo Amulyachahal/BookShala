@@ -3,7 +3,7 @@ import NavBar from "../../Components/NavBar";
 import { BookContext } from "../../Contexts/BookContext";
 import Button from "@mui/material/Button";
 import { NavLink } from "react-router-dom";
-import generalbgimage from "../../Images/BackgroundImage/generalbgimage.jpg";
+import landingbgimage from "../../Images/BackgroundImage/landingbgimage.jpg";
 import Footer from "../../Components/Footer";
 
 const CheckoutPage = () => {
@@ -12,7 +12,7 @@ const CheckoutPage = () => {
   return (
     <>
       <NavBar />
-      <div style={{ backgroundImage: `url(${generalbgimage})` }}>
+      <div style={{ backgroundImage: `url(${landingbgimage})` }}>
         <div
           style={{
             border: "solid 1px white",

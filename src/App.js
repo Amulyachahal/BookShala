@@ -50,10 +50,10 @@ function App() {
             </RequiresAuth>
           }
         />
-        <Route
+        {/* <Route
           path="/category/:categoryId"
           element={<CategoryDescriptionPage />}
-        />
+        /> */}
         <Route path="/allProducts" element={<AllProductsPage />} />
         <Route path="/nodatafound" element={<NoDataFound />} />
         <Route

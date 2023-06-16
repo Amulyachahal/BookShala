@@ -2,7 +2,7 @@ import React, { useContext, useEffect } from "react";
 import NavBar from "../../Components/NavBar";
 import { BookContext } from "../../Contexts/BookContext";
 import Button from "@mui/material/Button";
-import generalbgimage from "../../Images/BackgroundImage/generalbgimage.jpg";
+import landingbgimage from "../../Images/BackgroundImage/landingbgimage.jpg";
 
 const WishListPage = () => {
   const {
@@ -19,7 +19,7 @@ const WishListPage = () => {
   }, []);
 
   return (
-    <div style={{ backgroundImage: `url(${generalbgimage})` }}>
+    <div style={{ backgroundImage: `url(${landingbgimage})` }}>
       <NavBar />
       <div>
         <div>

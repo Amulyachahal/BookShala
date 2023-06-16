@@ -4,6 +4,7 @@ import { BookContext } from "../Contexts/BookContext";
 import styles from "./NavBar.module.css";
 import Button from "@mui/material/Button";
 import landingbgimage from "../Images/BackgroundImage/landingbgimage.jpg";
+import "./Navbar.css";
 
 const NavBar = () => {
   const { state, dispatch, fetchCartData, fetchWishlistData } = useContext(
@@ -25,6 +26,7 @@ const NavBar = () => {
         <div
           className={styles.navbarContainer}
           style={{
+            backgroundImage: `url(${landingbgimage})`,
             border: "solid 1px white",
             maxWidth: "30rem",
             margin: "1rem",
@@ -84,6 +86,24 @@ const NavBar = () => {
               </Button>
             </NavLink>
           )}
+          <NavLink
+            style={{
+              textDecoration: "none",
+              fontWeight: "bold",
+              color: "white",
+              backgroundColor: "#2196f3",
+              padding: "0.3rem 0.3rem",
+              borderRadius: "5px",
+            }}
+            onClick={() => {
+              dispatch({ type: "RESET_SEARCH" });
+            }}
+            to="/"
+            className={styles.navbarLink}
+          >
+            Home
+          </NavLink>{" "}
+          ||{" "}
           <NavLink
             style={{
               textDecoration: "none",

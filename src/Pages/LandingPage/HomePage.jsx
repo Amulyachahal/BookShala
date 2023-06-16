@@ -1,5 +1,6 @@
 import React, { useContext } from "react";
 import { NavLink } from "react-router-dom";
+import { useNavigate } from "react-router";
 import { BookContext } from "../../Contexts/BookContext";
 import LandingPageImage from "../../Images/Landing_Page/landingPageImage.jpg";
 
@@ -10,7 +11,8 @@ import landingbgimage from "../../Images/BackgroundImage/landingbgimage.jpg";
 
 const Home = () => {
   const { state, dispatch } = useContext(BookContext);
-  console.log(state.cart);
+  const navigate = useNavigate();
+  console.log(state.categories);
 
   return (
     <>
@@ -45,7 +47,17 @@ const Home = () => {
             <ul>
               {state.categories.map(
                 ({ _id, categoryName, description, image }, index) => (
-                  <NavLink to={`/category/${categoryName}`} key={index}>
+                  <div
+                    style={{ display: "inline-block" }}
+                    onClick={() => {
+                      dispatch({
+                        type: "SEARCH_CATEGORY",
+                        payload: categoryName,
+                      });
+                      navigate("/allproducts");
+                    }}
+                    key={index}
+                  >
                     <li
                       key={index}
                       style={{
@@ -57,13 +69,14 @@ const Home = () => {
                         boxShadow: "0 0 20px rgba(0, 0, 0, 0.1)",
                         borderRadius: "10px",
                         backgroundColor: "#fff",
+                        cursor: "pointer",
                       }}
                     >
                       <img src={image} alt="fiction" />
                       <h3>{categoryName}</h3>
                       <p>{description}</p>
                     </li>
-                  </NavLink>
+                  </div>
                 )
               )}
             </ul>

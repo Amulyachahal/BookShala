@@ -4,7 +4,7 @@ import NavBar from "../../Components/NavBar";
 import { BookContext } from "../../Contexts/BookContext";
 import Button from "@mui/material/Button";
 import { useNavigate } from "react-router-dom";
-import generalbgimage from "../../Images/BackgroundImage/generalbgimage.jpg";
+import landingbgimage from "../../Images/BackgroundImage/landingbgimage.jpg";
 
 const AllProductsPage = () => {
   const {
@@ -21,13 +21,14 @@ const AllProductsPage = () => {
 
   return (
     <>
-      <NavBar />
       <div
         style={{
-          backgroundImage: `url(${generalbgimage})`,
+          backgroundImage: `url(${landingbgimage})`,
           marginTop: "-1.35rem",
         }}
       >
+        <NavBar />
+
         <h1 style={{ fontStyle: "italic", color: "#ededed" }}>All Books</h1>
         <div
           style={{
@@ -115,9 +116,21 @@ const AllProductsPage = () => {
           <Button
             variant="contained"
             style={{ margin: "0.5rem" }}
+            size="small"
             onClick={() => window.location.reload()}
           >
             Clear Filters
+          </Button>
+          <Button
+            variant="contained"
+            style={{ margin: "0.5rem" }}
+            size="small"
+            onClick={() => {
+              dispatch({ type: "RESET_SEARCH" });
+              navigate("/");
+            }}
+          >
+            Back
           </Button>
         </div>
         <div>
