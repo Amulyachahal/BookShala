@@ -117,20 +117,30 @@ export const DataReducer = (state, action) => {
     case "CATEGORY_CHECKBOX":
       if (action.payload) {
         const books =
-          state.searchResults.length > 0 ? state.searchResults : state.books;
-        const filteredCategory = books.filter(
-          (book) => book.categoryName === action.value
+          state.searchResults.length > 0
+            ? state.searchResults
+            : state.initialBooks;
+
+        const selectedCategories = state.categories.filter(
+          (category) =>
+            action.payload && action.value.includes(category.categoryName)
+        );
+
+        const filteredBooks = state.initialBooks.filter((book) =>
+          selectedCategories.some(
+            (category) => category.categoryName === book.categoryName
+          )
         );
 
         if (state.searchResults.length > 0) {
           return {
             ...state,
-            searchResults: [...filteredCategory],
+            searchResults: [...filteredBooks],
           };
         } else {
           return {
             ...state,
-            books: [...filteredCategory],
+            books: [...filteredBooks],
           };
         }
       } else {
@@ -143,6 +153,14 @@ export const DataReducer = (state, action) => {
           };
         }
       }
+
+    case "CLEAR_FILTERS":
+      return {
+        ...state,
+        books: [...state.initialBooks],
+        searchResults: [],
+        noDataFound: false,
+      };
 
     case "RESET_FILTERS":
       return { ...state, books: [...state.initialBooks] };

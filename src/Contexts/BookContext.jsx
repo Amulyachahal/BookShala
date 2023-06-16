@@ -10,6 +10,7 @@ export const BookProvider = ({ children }) => {
     categories: [],
     books: [],
     initialBooks: [],
+    filteredCategoryBooks: [],
     searchResults: [],
     cart: [],
     cartProductCount: 1,

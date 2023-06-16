@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { NavLink } from "react-router-dom";
 import NavBar from "../../Components/NavBar";
 import { BookContext } from "../../Contexts/BookContext";
@@ -15,9 +15,38 @@ const AllProductsPage = () => {
   } = useContext(BookContext);
 
   const navigate = useNavigate();
+  const [selectedCategories, setSelectedCategories] = useState([]);
 
   const books =
     state.searchResults.length > 0 ? state.searchResults : state.books;
+
+  const handleCategoryCheckbox = (event) => {
+    const { value, checked } = event.target;
+    const updatedCategories = checked
+      ? [...selectedCategories, value]
+      : selectedCategories.filter((category) => category !== value);
+
+    setSelectedCategories(updatedCategories);
+    dispatch({
+      type: "CATEGORY_CHECKBOX",
+      payload: updatedCategories.length > 0,
+      value: updatedCategories,
+    });
+  };
+
+  const handleClearFilters = () => {
+    dispatch({ type: "CLEAR_FILTERS" });
+    setSelectedCategories([]);
+  };
+
+  const handleCheckboxChange = (event) => {
+    const category = event.target.value;
+    if (event.target.checked) {
+      setSelectedCategories([...selectedCategories, category]);
+    } else {
+      setSelectedCategories(selectedCategories.filter((c) => c !== category));
+    }
+  };
 
   return (
     <>
@@ -75,39 +104,24 @@ const AllProductsPage = () => {
                   type="checkbox"
                   value="fiction"
                   name="fiction"
-                  onClick={(event) =>
-                    dispatch({
-                      type: "CATEGORY_CHECKBOX",
-                      payload: event.target.checked,
-                      value: event.target.value,
-                    })
-                  }
+                  onClick={handleCategoryCheckbox}
+                  checked={selectedCategories.includes("fiction")}
                 />
                 <label>Fiction</label>
                 <input
                   type="checkbox"
                   name="horror"
                   value="horror"
-                  onClick={(event) =>
-                    dispatch({
-                      type: "CATEGORY_CHECKBOX",
-                      payload: event.target.checked,
-                      value: event.target.value,
-                    })
-                  }
+                  onClick={handleCategoryCheckbox}
+                  checked={selectedCategories.includes("horror")}
                 />
                 <label>Horror</label>
                 <input
                   type="checkbox"
                   name="non-fiction"
                   value="non-fiction"
-                  onClick={(event) =>
-                    dispatch({
-                      type: "CATEGORY_CHECKBOX",
-                      payload: event.target.checked,
-                      value: event.target.value,
-                    })
-                  }
+                  onClick={handleCategoryCheckbox}
+                  checked={selectedCategories.includes("non-fiction")}
                 />
                 <label>Non-fiction</label>
               </div>
@@ -117,7 +131,7 @@ const AllProductsPage = () => {
             variant="contained"
             style={{ margin: "0.5rem" }}
             size="small"
-            onClick={() => window.location.reload()}
+            onClick={handleClearFilters}
           >
             Clear Filters
           </Button>

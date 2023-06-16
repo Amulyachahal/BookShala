@@ -12,7 +12,6 @@ import landingbgimage from "../../Images/BackgroundImage/landingbgimage.jpg";
 const Home = () => {
   const { state, dispatch } = useContext(BookContext);
   const navigate = useNavigate();
-  console.log(state.categories);
 
   return (
     <>
