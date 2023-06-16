@@ -57,11 +57,7 @@ const CheckoutPage = () => {
             </strong>{" "}
           </div>
           <div>
-            <Button
-              onClick={() => window.location.reload()}
-              style={{ margin: "0.5rem" }}
-              variant="outlined"
-            >
+            <Button style={{ margin: "0.5rem" }} variant="outlined">
               <NavLink style={{ textDecoration: "none" }} to="/order">
                 CHECK OUT
               </NavLink>
