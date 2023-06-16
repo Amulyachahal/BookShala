@@ -27,12 +27,26 @@ const CartPage = () => {
         <div>
           <ul>
             {state.cart.map((book, index) => (
-              <li key={index}>
+              <li
+                key={index}
+                style={{
+                  border: "solid 1px white",
+                  maxWidth: "15rem",
+                  margin: "1rem",
+                  padding: "0.5rem",
+                  display: "inline-block",
+                  boxShadow: "0 0 20px rgba(0, 0, 0, 0.1)",
+                  borderRadius: "10px",
+                  backgroundColor: "#fff",
+                }}
+              >
+                <img src={book.image} />
                 <div>{book.title}</div>
                 <div>{book.author}</div>
                 <div>{book.price}</div>
                 <div>
                   <Button
+                    style={{ margin: "0.5rem" }}
                     variant="outlined"
                     onClick={() => {
                       dispatch({ type: "REMOVE_FROM_CART", payload: book._id });
@@ -92,28 +106,39 @@ const CartPage = () => {
           </ul>
           {state.cart.length > 0 ? (
             <div>
-              <div>
-                <h3>PRICE DETAILS</h3>
-              </div>
-              <div>
-                {/* <div>
-              Price:{" "}
-              {state.cart.reduce((acc, curr) => (acc += Number(curr.price)), 0)}
-            </div> */}
-                <div>Delivery Charges: FREE</div>
+              <div
+                style={{
+                  border: "solid 1px white",
+                  maxWidth: "15rem",
+                  margin: "1rem",
+                  padding: "0.5rem",
+                  display: "inline-block",
+                  boxShadow: "0 0 20px rgba(0, 0, 0, 0.1)",
+                  borderRadius: "10px",
+                  backgroundColor: "#fff",
+                }}
+              >
                 <div>
-                  <strong>
-                    TotalAmount: INR{" "}
-                    {state.cart.reduce(
-                      (acc, curr) => (acc += Number(curr.price)),
-                      0
-                    )}
-                  </strong>
+                  <h3>PRICE DETAILS</h3>
                 </div>
                 <div>
-                  <NavLink to="/checkout">
-                    <Button variant="contained">PLACE ORDER</Button>
-                  </NavLink>
+                  <div>Delivery Charges: FREE</div>
+                  <div>
+                    <strong>
+                      TotalAmount: INR{" "}
+                      {state.cart.reduce(
+                        (acc, curr) => (acc += Number(curr.price)),
+                        0
+                      )}
+                    </strong>
+                  </div>
+                  <div>
+                    <NavLink to="/checkout">
+                      <Button style={{ margin: "0.5rem" }} variant="contained">
+                        PLACE ORDER
+                      </Button>
+                    </NavLink>
+                  </div>
                 </div>
               </div>
             </div>

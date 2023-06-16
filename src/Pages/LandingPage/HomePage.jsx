@@ -9,6 +9,7 @@ import Button from "@mui/material/Button";
 
 const Home = () => {
   const { state, dispatch } = useContext(BookContext);
+  console.log(state.cart);
 
   return (
     <>

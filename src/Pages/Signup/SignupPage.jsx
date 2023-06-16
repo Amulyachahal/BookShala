@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import styles from "./SignupPage.module.css";
 import Button from "@mui/material/Button";
 import { useNavigate } from "react-router-dom";
@@ -12,6 +12,7 @@ const SignupPage = () => {
   const navigate = useNavigate();
   const { dispatch } = useContext(BookContext);
   const [responseData, setResponseData] = useState({});
+  const [attemptedSignUp, setAttemptedSignUp] = useState(false);
 
   const signupCreds = {
     email: email,
@@ -39,17 +40,18 @@ const SignupPage = () => {
   };
 
   const handleSubmit = (e) => {
+    setAttemptedSignUp(true);
     postSignupCreds();
-
-    setTimeout(() => {
-      if (responseData.createdUser) {
-        navigate("/login");
-      }
-      if (responseData.errors) {
-        alert(`${responseData.errors[0]}`);
-      }
-    }, 1000);
   };
+
+  useEffect(() => {
+    if (attemptedSignUp && responseData.createdUser) {
+      navigate("/login");
+    }
+    if (attemptedSignUp && responseData.errors) {
+      alert(`${responseData.errors[0]}`);
+    }
+  }, [attemptedSignUp, responseData]);
 
   return (
     <div className={styles.container}>

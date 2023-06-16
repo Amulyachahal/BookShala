@@ -59,7 +59,7 @@ export const DataReducer = (state, action) => {
       };
 
     case "GET_WISHLIST_DATA":
-      return { ...state, wishlist: [...action.payload] };
+      return { ...state, wishlist: action.payload };
 
     case "REMOVE_FROM_WISHLIST":
       const removeFromWishlist = state.wishlist.filter(
@@ -142,29 +142,11 @@ export const DataReducer = (state, action) => {
     case "LOGOUT":
       return { ...state, isLoggedIn: !state.isLoggedIn };
 
-    case "LOGIN_CREDS":
-      return {
-        ...state,
-        loginCreds: {
-          email: action.payload_email,
-          password: action.payload_password,
-        },
-      };
-
-    case "SIGNUP_CREDS":
-      return {
-        ...state,
-        signupCreds: { ...action.payload },
-      };
+    case "ADD_ADDRESS":
+      return { ...state, addAddress: { ...state.addAddress } };
 
     case "SIGNUP_USER":
       return { ...state, signupUserCreds: { ...action.payload } };
-
-    // case "TEST_LOGIN":
-    //   return {
-    //     ...state,
-    //     loginCreds: { email: "amulyachahal@gmail.com", password: "123456" },
-    //   };
 
     case "RESET_USER":
       return { ...state, cart: [], wishlist: [] };

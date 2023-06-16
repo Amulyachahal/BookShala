@@ -27,18 +27,36 @@ const WishListPage = () => {
         <div>
           <ul>
             {state.wishlist.map((book, index) => (
-              <li key={index}>
+              <li
+                key={index}
+                style={{
+                  border: "solid 1px white",
+                  maxWidth: "15rem",
+                  margin: "1rem",
+                  padding: "0.5rem",
+                  display: "inline-block",
+                  boxShadow: "0 0 20px rgba(0, 0, 0, 0.1)",
+                  borderRadius: "10px",
+                  backgroundColor: "#fff",
+                }}
+              >
+                <img src={book.image} />
                 <div>{book.title}</div>
                 <div>{book.author}</div>
                 <div>{book.price}</div>
                 <div>
                   {state.inCart[book._id] ? (
-                    <Button variant="outlined" disabled>
+                    <Button
+                      style={{ margin: "0.5rem" }}
+                      variant="outlined"
+                      disabled
+                    >
                       Added to Cart
                     </Button>
                   ) : (
                     <Button
                       variant="outlined"
+                      style={{ margin: "0.5rem" }}
                       onClick={() => postAddToCartData(book)}
                     >
                       ADD TO CART

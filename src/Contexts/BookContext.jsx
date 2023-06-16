@@ -22,6 +22,18 @@ export const BookProvider = ({ children }) => {
     loginCreds: {},
     signupCreds: {},
     signupUserCreds: {},
+    addresses: {
+      add: false,
+      address: [
+        {
+          house: "33-A, Ragvillas Society",
+          street: "Lane C",
+          city: "KoregaonPark, Pune",
+          pincode: "411014",
+          country: "India",
+        },
+      ],
+    },
   });
 
   const fetchCategoriesData = async () => {

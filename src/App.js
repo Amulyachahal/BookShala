@@ -14,6 +14,7 @@ import SignupPage from "./Pages/Signup/SignupPage";
 import LoginPage from "./Pages/Login/LoginPage";
 import CheckoutPage from "./Pages/CheckoutPage/CheckoutPage";
 import RequiresAuth from "./Auth/RequiresAuth";
+import Ordered from "./Pages/Ordered/Ordered";
 
 function App() {
   return (
@@ -32,6 +33,7 @@ function App() {
 
         <Route path="/signup" element={<SignupPage />} />
         <Route path="/login" element={<LoginPage />} />
+        <Route path="/order" element={<Ordered />} />
         <Route
           path="/wishlist"
           element={

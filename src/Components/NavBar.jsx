@@ -79,7 +79,7 @@ const NavBar = () => {
             borderRadius: "5px",
           }}
           onClick={() => {
-            dispatch({ type: "RESET" });
+            // dispatch({ type: "RESET" });
             fetchWishlistData();
           }}
           to="/wishlist"

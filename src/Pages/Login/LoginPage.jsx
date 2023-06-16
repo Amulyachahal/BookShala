@@ -1,7 +1,7 @@
-import Button from "@mui/material/Button";
 import React, { useContext, useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router";
 import { BookContext } from "../../Contexts/BookContext";
+import Button from "@mui/material/Button";
 import styles from "./LoginPage.module.css";
 
 const LoginPage = () => {
@@ -9,7 +9,9 @@ const LoginPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [responseData, setResponseData] = useState({});
+  const [loginAttempted, setLoginAttempted] = useState(false);
   const navigate = useNavigate();
+  const location = useLocation();
 
   const loginCreds = { email: email, password: password };
 
@@ -22,7 +24,6 @@ const LoginPage = () => {
     try {
       const response = await fetch("/api/auth/login", {
         method: "POST",
-
         body: JSON.stringify(creds),
       });
 
@@ -35,32 +36,36 @@ const LoginPage = () => {
   };
 
   const loginHandeler = () => {
+    setLoginAttempted(true);
     postLoginCreds(loginCreds);
-
-    if (responseData.foundUser) {
-      localStorage.setItem("encodedToken", responseData.encodedToken);
-
-      dispatch({ type: "LOGIN" });
-      navigate("/");
-    }
-    if (responseData.errors) {
-      alert(`${responseData.errors[0]}`);
-    }
   };
 
-  const testLoginHandeler = (e) => {
+  const testLoginHandeler = () => {
+    setLoginAttempted(true);
+    dispatch({
+      type: "SIGNUP_USER",
+      payload: {
+        email: "amulyachahal@gmail.com",
+        password: "123456",
+        firstName: "Amulya",
+        lastName: "Chahal",
+      },
+    });
     postLoginCreds(testLoginCreds);
+  };
 
-    if (responseData.foundUser) {
+  useEffect(() => {
+    if (loginAttempted && responseData.foundUser) {
       localStorage.setItem("encodedToken", responseData.encodedToken);
-
       dispatch({ type: "LOGIN" });
+
       navigate("/");
     }
-    if (responseData.errors) {
+
+    if (loginAttempted && responseData.errors) {
       alert(`${responseData.errors[0]}`);
     }
-  };
+  }, [loginAttempted, responseData]);
 
   return (
     <div className={styles.container}>
@@ -89,7 +94,7 @@ const LoginPage = () => {
             Login
           </Button>
           <p></p>
-          <Button onClick={(e) => testLoginHandeler(e)} variant="contained">
+          <Button onClick={testLoginHandeler} variant="contained">
             Login with Test credentials
           </Button>{" "}
           <p></p>

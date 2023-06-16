@@ -99,7 +99,11 @@ const AllProductsPage = () => {
               </div>
             </fieldset>
           </div>
-          <Button variant="contained" onClick={() => window.location.reload()}>
+          <Button
+            variant="contained"
+            style={{ margin: "0.5rem" }}
+            onClick={() => window.location.reload()}
+          >
             Clear Filters
           </Button>
         </div>
@@ -129,7 +133,10 @@ const AllProductsPage = () => {
                     backgroundColor: "#fff",
                   }}
                 >
-                  <NavLink to={`/productpage/${_id}`}>
+                  <NavLink
+                    style={{ textDecoration: "none" }}
+                    to={`/productpage/${_id}`}
+                  >
                     <img src={image} />
                     <div>{title}</div>
                     <div>{author}</div>
