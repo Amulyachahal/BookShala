@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import { NavLink } from "react-router-dom";
 import { useNavigate } from "react-router";
 import { BookContext } from "../../Contexts/BookContext";
-import LandingPageImage from "../../Images/Landing_Page/landingPageImage.jpg";
+import LandingPageImage2 from "../../Images/Landing_Page/landingPageImage2.jpg";
 
 import NavBar from "../../Components/NavBar";
 import Footer from "../../Components/Footer";
@@ -22,11 +22,13 @@ const Home = () => {
           <div>
             <img
               style={{
-                border: "solid 1px white",
+                border: "solid 1px #2a9dbc",
+                width: "25rem",
                 boxShadow: "0 0 20px rgba(0, 0, 0, 0.1)",
                 borderRadius: "10px",
+                borderTopLeftRadius: "160px",
               }}
-              src={LandingPageImage}
+              src={LandingPageImage2}
               alt="landingPageImage"
             />
             <div>
@@ -40,8 +42,7 @@ const Home = () => {
             </div>
           </div>
           <div>
-            <h2>Categories</h2>
-            <p>Book Categories</p>
+            <h2 style={{ color: "white" }}>Categories</h2>
           </div>
           <div>
             <ul>
