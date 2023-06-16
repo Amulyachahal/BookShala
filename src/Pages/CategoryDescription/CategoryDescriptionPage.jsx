@@ -48,7 +48,10 @@ const CategoryDescriptionPage = () => {
                     backgroundColor: "#fff",
                   }}
                 >
-                  <NavLink to={`/productpage/${_id}`}>
+                  <NavLink
+                    style={{ textDecoration: "none" }}
+                    to={`/productpage/${_id}`}
+                  >
                     <img src={image} />
                     <div>{title}</div>
                     <div>{author}</div>

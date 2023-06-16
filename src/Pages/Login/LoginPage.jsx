@@ -57,9 +57,9 @@ const LoginPage = () => {
   useEffect(() => {
     if (loginAttempted && responseData.foundUser) {
       localStorage.setItem("encodedToken", responseData.encodedToken);
-      dispatch({ type: "LOGIN" });
-
+      // navigate(location?.state?.from?.pathname);
       navigate("/");
+      dispatch({ type: "LOGIN" });
     }
 
     if (loginAttempted && responseData.errors) {
