@@ -4,6 +4,7 @@ import NavBar from "../../Components/NavBar";
 import { BookContext } from "../../Contexts/BookContext";
 import Button from "@mui/material/Button";
 import { useNavigate } from "react-router-dom";
+import generalbgimage from "../../Images/BackgroundImage/generalbgimage.jpg";
 
 const AllProductsPage = () => {
   const {
@@ -21,9 +22,21 @@ const AllProductsPage = () => {
   return (
     <>
       <NavBar />
-      <div style={{ backgroundColor: "#ededed" }}>
-        <h1>All Books</h1>
-        <div style={{ display: "inline-block" }}>
+      <div
+        style={{
+          backgroundImage: `url(${generalbgimage})`,
+          marginTop: "-1.35rem",
+        }}
+      >
+        <h1 style={{ fontStyle: "italic", color: "#ededed" }}>All Books</h1>
+        <div
+          style={{
+            display: "inline-block",
+            backgroundColor: "#ededed",
+            padding: "1rem",
+            borderRadius: "10px",
+          }}
+        >
           <div>
             <fieldset>
               <legend>Sort By </legend>

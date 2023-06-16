@@ -3,6 +3,8 @@ import NavBar from "../../Components/NavBar";
 import { BookContext } from "../../Contexts/BookContext";
 import Button from "@mui/material/Button";
 import { NavLink } from "react-router-dom";
+import generalbgimage from "../../Images/BackgroundImage/generalbgimage.jpg";
+import Footer from "../../Components/Footer";
 
 const CheckoutPage = () => {
   const { state } = useContext(BookContext);
@@ -10,7 +12,7 @@ const CheckoutPage = () => {
   return (
     <>
       <NavBar />
-      <div style={{ backgroundColor: "#ededed" }}>
+      <div style={{ backgroundImage: `url(${generalbgimage})` }}>
         <div
           style={{
             border: "solid 1px white",
@@ -66,6 +68,7 @@ const CheckoutPage = () => {
             </Button>
           </div>
         </div>
+        <Footer />
       </div>
     </>
   );

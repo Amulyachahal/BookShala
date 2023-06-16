@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import { NavLink } from "react-router-dom";
 import NavBar from "../../Components/NavBar";
 import { BookContext } from "../../Contexts/BookContext";
+import generalbgimage from "../../Images/BackgroundImage/generalbgimage.jpg";
 
 const NoDataFound = () => {
   const { dispatch } = useContext(BookContext);

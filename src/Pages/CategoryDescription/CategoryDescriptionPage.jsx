@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import NavBar from "../../Components/NavBar";
 import { BookContext } from "../../Contexts/BookContext";
 import Button from "@mui/material/Button";
+import generalbgimage from "../../Images/BackgroundImage/generalbgimage.jpg";
 
 const CategoryDescriptionPage = () => {
   const { state, postAddToCartData, postAddToWishListData } = useContext(
@@ -19,7 +20,12 @@ const CategoryDescriptionPage = () => {
   return (
     <>
       <NavBar />
-      <div style={{ backgroundColor: "#ededed" }}>
+      <div
+        style={{
+          backgroundImage: `url(${generalbgimage})`,
+          marginTop: "-1.35rem",
+        }}
+      >
         <h1>{categoryId.toLocaleUpperCase()}</h1>
 
         <div>

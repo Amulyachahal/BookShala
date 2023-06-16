@@ -15,11 +15,13 @@ const Footer = () => {
       </div>
       <div className={styles.footerRight}>
         <ul className={styles.footerSocial}>
-          <li>
+          <li style={{ listStyle: "none" }}>
             <h3 className={styles.footerLink}>Connect</h3>
             <p className={styles.footerSocialLink}>Github</p>
             <p className={styles.footerSocialLink}>Twitter</p>
             <p className={styles.footerSocialLink}>LinkedIn</p>
+            <p className={styles.footerSocialLink}>Dev Portfolio</p>{" "}
+            <p className={styles.footerSocialLink}>YouTube</p>
           </li>
         </ul>
       </div>

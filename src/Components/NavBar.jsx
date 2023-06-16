@@ -3,6 +3,7 @@ import { Navigate, NavLink, useNavigate } from "react-router-dom";
 import { BookContext } from "../Contexts/BookContext";
 import styles from "./NavBar.module.css";
 import Button from "@mui/material/Button";
+import landingbgimage from "../Images/BackgroundImage/landingbgimage.jpg";
 
 const NavBar = () => {
   const { state, dispatch, fetchCartData, fetchWishlistData } = useContext(
@@ -17,8 +18,24 @@ const NavBar = () => {
 
   return (
     <>
-      <nav className={styles.navbar} style={{ backgroundColor: "#ededed" }}>
-        <div className={styles.navbarContainer}>
+      <nav
+        className={styles.navbar}
+        style={{ backgroundImage: `url(${landingbgimage})` }}
+      >
+        <div
+          className={styles.navbarContainer}
+          style={{
+            border: "solid 1px white",
+            maxWidth: "30rem",
+            margin: "1rem",
+            padding: "0.5rem",
+            display: "inline-block",
+            boxShadow: "0 0 20px rgba(0, 0, 0, 0.1)",
+            borderRadius: "10px",
+            backgroundColor: "#ededed",
+            padding: "1.5rem 0rem",
+          }}
+        >
           <div>
             {state.isLoggedIn ? (
               <Button size="small" variant="contained" onClick={logoutHandeler}>
@@ -44,7 +61,6 @@ const NavBar = () => {
               </h1>
             </NavLink>
           </div>
-
           <input
             style={{ margin: "24px auto", maxWidth: "20rem" }}
             onChange={(event) => {
@@ -68,59 +84,59 @@ const NavBar = () => {
               </Button>
             </NavLink>
           )}
-        </div>
-        <NavLink
-          style={{
-            textDecoration: "none",
-            fontWeight: "bold",
-            color: "white",
-            backgroundColor: "#2196f3",
-            padding: "0.3rem 0.3rem",
-            borderRadius: "5px",
-          }}
-          onClick={() => {
-            // dispatch({ type: "RESET" });
-            fetchWishlistData();
-          }}
-          to="/wishlist"
-          className={styles.navbarLink}
-        >
-          WishList ({state.wishlist.length})
-        </NavLink>{" "}
-        ||{" "}
-        <NavLink
-          style={{
-            textDecoration: "none",
-            fontWeight: "bold",
-            color: "white",
-            backgroundColor: "#2196f3",
-            padding: "0.3rem 0.3rem",
-            borderRadius: "5px",
-          }}
-          onClick={() => {
-            fetchCartData();
-          }}
-          to="/cart"
-          className={styles.navbarLink}
-        >
-          Cart ({state.cart.length})
-        </NavLink>{" "}
-        ||{" "}
-        <NavLink
-          style={{
-            textDecoration: "none",
-            fontWeight: "bold",
-            color: "white",
-            backgroundColor: "#2196f3",
-            padding: "0.3rem 0.3rem",
-            borderRadius: "5px",
-          }}
-          onClick={() => dispatch({ type: "RESET" })}
-          to="/userprofile"
-          className={styles.navbarLink}
-        >
-          User Profile
-        </NavLink>{" "}
+          <NavLink
+            style={{
+              textDecoration: "none",
+              fontWeight: "bold",
+              color: "white",
+              backgroundColor: "#2196f3",
+              padding: "0.3rem 0.3rem",
+              borderRadius: "5px",
+            }}
+            onClick={() => {
+              // dispatch({ type: "RESET" });
+              fetchWishlistData();
+            }}
+            to="/wishlist"
+            className={styles.navbarLink}
+          >
+            WishList ({state.wishlist.length})
+          </NavLink>{" "}
+          ||{" "}
+          <NavLink
+            style={{
+              textDecoration: "none",
+              fontWeight: "bold",
+              color: "white",
+              backgroundColor: "#2196f3",
+              padding: "0.3rem 0.3rem",
+              borderRadius: "5px",
+            }}
+            onClick={() => {
+              fetchCartData();
+            }}
+            to="/cart"
+            className={styles.navbarLink}
+          >
+            Cart ({state.cart.length})
+          </NavLink>{" "}
+          ||{" "}
+          <NavLink
+            style={{
+              textDecoration: "none",
+              fontWeight: "bold",
+              color: "white",
+              backgroundColor: "#2196f3",
+              padding: "0.3rem 0.3rem",
+              borderRadius: "5px",
+            }}
+            onClick={() => dispatch({ type: "RESET" })}
+            to="/userprofile"
+            className={styles.navbarLink}
+          >
+            User Profile
+          </NavLink>{" "}
+        </div>{" "}
       </nav>
     </>
   );

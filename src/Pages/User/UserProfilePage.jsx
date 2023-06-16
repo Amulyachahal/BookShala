@@ -2,6 +2,8 @@ import React, { useContext, useState } from "react";
 import NavBar from "../../Components/NavBar";
 import { BookContext } from "../../Contexts/BookContext";
 import Button from "@mui/material/Button";
+import generalbgimage from "../../Images/BackgroundImage/generalbgimage.jpg";
+import Footer from "../../Components/Footer";
 
 const UserProfilePage = () => {
   const { state, dispatch } = useContext(BookContext);
@@ -20,10 +22,12 @@ const UserProfilePage = () => {
   //     : dispatch({ type: "ADD_ADDRESS" }) && showAddModal(false);
   // };
   return (
-    <div style={{ backgroundColor: "#ededed" }}>
+    <div style={{ backgroundImage: `url(${generalbgimage})` }}>
       <NavBar />
-      <div style={{ backgroundColor: "#ededed" }}>
-        <h1>{state.signupUserCreds.firstName} Profile </h1>
+      <div style={{ backgroundColor: "" }}>
+        <h1 style={{ color: "white" }}>
+          {state.signupUserCreds.firstName} Profile{" "}
+        </h1>
         <div>
           <div
             style={{
@@ -106,6 +110,7 @@ const UserProfilePage = () => {
           )}
         </div>
       </div>
+      <Footer />
     </div>
   );
 };

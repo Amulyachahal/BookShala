@@ -4,6 +4,7 @@ import NavBar from "../../Components/NavBar";
 import { BookContext } from "../../Contexts/BookContext";
 import Button from "@mui/material/Button";
 import { useNavigate } from "react-router-dom";
+import generalbgimage from "../../Images/BackgroundImage/generalbgimage.jpg";
 
 const BookDescriptionPage = () => {
   const navigate = useNavigate();

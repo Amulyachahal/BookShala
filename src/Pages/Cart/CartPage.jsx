@@ -3,6 +3,7 @@ import { NavLink } from "react-router-dom";
 import NavBar from "../../Components/NavBar";
 import { BookContext } from "../../Contexts/BookContext";
 import Button from "@mui/material/Button";
+import generalbgimage from "../../Images/BackgroundImage/generalbgimage.jpg";
 
 const CartPage = () => {
   const {
@@ -18,11 +19,24 @@ const CartPage = () => {
   }, []);
 
   return (
-    <div style={{ backgroundColor: "#ededed" }}>
+    <div style={{ backgroundImage: `url(${generalbgimage})` }}>
       <NavBar />
       <div>
-        <div style={{ backgroundColor: "#ededed" }}>
-          <h1>My Cart ({state.cart.length})</h1>
+        <div>
+          <h1
+            style={{
+              border: "solid 1px white",
+              maxWidth: "15rem",
+              margin: "1rem",
+              padding: "0.5rem",
+              display: "inline-block",
+              boxShadow: "0 0 20px rgba(0, 0, 0, 0.1)",
+              borderRadius: "10px",
+              backgroundColor: "#fff",
+            }}
+          >
+            My Cart ({state.cart.length})
+          </h1>
         </div>
         <div>
           <ul>

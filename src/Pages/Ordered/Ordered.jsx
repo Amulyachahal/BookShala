@@ -4,6 +4,7 @@ import { BookContext } from "../../Contexts/BookContext";
 import Button from "@mui/material/Button";
 import { useNavigate } from "react-router";
 import { NavLink } from "react-router-dom";
+import generalbgimage from "../../Images/BackgroundImage/generalbgimage.jpg";
 
 const Ordered = () => {
   const navigate = useNavigate();
@@ -21,6 +22,8 @@ const Ordered = () => {
           boxShadow: "0 0 20px rgba(0, 0, 0, 0.1)",
           borderRadius: "10px",
           backgroundColor: "#fff",
+          backgroundImage: `url(${generalbgimage})`,
+          color: "white",
         }}
       >
         <h3>Congratulations, Your order is successfully placed</h3>
