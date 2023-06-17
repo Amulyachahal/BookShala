@@ -7,7 +7,6 @@ import AllProductsPage from "./Pages/AllProducts/AllProductsPage";
 import CartPage from "./Pages/Cart/CartPage";
 import WishListPage from "./Pages/WishList/WishListPage";
 import UserProfilePage from "./Pages/User/UserProfilePage";
-import CategoryDescriptionPage from "./Pages/CategoryDescription/CategoryDescriptionPage";
 import BookDescriptionPage from "./Pages/BookDescription/BookDescriptionPage";
 import NoDataFound from "./Pages/Error/NoDataFoundPage";
 import SignupPage from "./Pages/Signup/SignupPage";
@@ -50,10 +49,7 @@ function App() {
             </RequiresAuth>
           }
         />
-        {/* <Route
-          path="/category/:categoryId"
-          element={<CategoryDescriptionPage />}
-        /> */}
+
         <Route path="/allProducts" element={<AllProductsPage />} />
         <Route path="/nodatafound" element={<NoDataFound />} />
         <Route

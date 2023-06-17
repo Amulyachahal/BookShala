@@ -13,9 +13,9 @@ const Home = () => {
   const { state, dispatch, fetchCartData, fetchWishlistData } = useContext(
     BookContext
   );
+  const navigate = useNavigate();
   const userToken = localStorage.getItem("encodedToken");
 
-  const navigate = useNavigate();
   // useEffect(() => {
   //   if (userToken) {
   //     fetchCartData();

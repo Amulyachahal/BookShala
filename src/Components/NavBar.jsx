@@ -17,6 +17,15 @@ const NavBar = () => {
     localStorage.clear();
   };
 
+  const userToken = localStorage.getItem("encodedToken");
+
+  useEffect(() => {
+    if (userToken) {
+      fetchCartData();
+      fetchWishlistData();
+    }
+  }, []);
+
   return (
     <>
       <nav
@@ -113,10 +122,6 @@ const NavBar = () => {
               padding: "0.3rem 0.3rem",
               borderRadius: "5px",
             }}
-            onClick={() => {
-              // dispatch({ type: "RESET" });
-              fetchWishlistData();
-            }}
             to="/wishlist"
             className={styles.navbarLink}
           >
@@ -131,9 +136,6 @@ const NavBar = () => {
               backgroundColor: "#2196f3",
               padding: "0.3rem 0.3rem",
               borderRadius: "5px",
-            }}
-            onClick={() => {
-              fetchCartData();
             }}
             to="/cart"
             className={styles.navbarLink}
