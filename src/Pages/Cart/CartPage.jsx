@@ -11,11 +11,13 @@ const CartPage = () => {
     dispatch,
     postAddToWishListData,
     fetchCartData,
+    fetchWishlistData,
     deleteCartData,
   } = useContext(BookContext);
 
   useEffect(() => {
     fetchCartData();
+    fetchWishlistData();
   }, []);
 
   return (

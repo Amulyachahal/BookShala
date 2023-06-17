@@ -39,14 +39,14 @@ const AllProductsPage = () => {
     setSelectedCategories([]);
   };
 
-  const handleCheckboxChange = (event) => {
-    const category = event.target.value;
-    if (event.target.checked) {
-      setSelectedCategories([...selectedCategories, category]);
-    } else {
-      setSelectedCategories(selectedCategories.filter((c) => c !== category));
-    }
-  };
+  // const handleCheckboxChange = (event) => {
+  //   const category = event.target.value;
+  //   if (event.target.checked) {
+  //     setSelectedCategories([...selectedCategories, category]);
+  //   } else {
+  //     setSelectedCategories(selectedCategories.filter((c) => c !== category));
+  //   }
+  // };
 
   return (
     <>

@@ -16,12 +16,12 @@ const Home = () => {
   const userToken = localStorage.getItem("encodedToken");
 
   const navigate = useNavigate();
-  useEffect(() => {
-    if (userToken) {
-      fetchCartData();
-      fetchWishlistData();
-    }
-  }, []);
+  // useEffect(() => {
+  //   if (userToken) {
+  //     fetchCartData();
+  //     fetchWishlistData();
+  //   }
+  // }, []);
 
   return (
     <>

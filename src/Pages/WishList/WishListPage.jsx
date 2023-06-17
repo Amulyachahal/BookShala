@@ -10,12 +10,13 @@ const WishListPage = () => {
     dispatch,
     postAddToCartData,
     fetchWishlistData,
+    fetchCartData,
     deleteWishlistData,
   } = useContext(BookContext);
-  const wishlistCount = state.wishlist.length;
 
   useEffect(() => {
     fetchWishlistData();
+    fetchCartData();
   }, []);
 
   return (
@@ -35,7 +36,7 @@ const WishListPage = () => {
               backgroundColor: "#fff",
             }}
           >
-            My WishList: ({wishlistCount})
+            My WishList: ({state.wishlist.length})
           </h1>
         </div>
         <div>
