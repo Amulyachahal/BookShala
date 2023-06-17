@@ -41,7 +41,6 @@ const LoginPage = () => {
   };
 
   const testLoginHandeler = () => {
-    setLoginAttempted(true);
     dispatch({
       type: "SIGNUP_USER",
       payload: {
@@ -51,14 +50,17 @@ const LoginPage = () => {
         lastName: "Chahal",
       },
     });
+    setTimeout(() => {
+      setLoginAttempted(true);
+    }, 0);
     postLoginCreds(testLoginCreds);
   };
 
   useEffect(() => {
     if (loginAttempted && responseData.foundUser) {
       localStorage.setItem("encodedToken", responseData.encodedToken);
-      // navigate(location?.state?.from?.pathname);
-      navigate("/");
+      navigate(location?.state?.from?.pathname);
+      // navigate("/");
       dispatch({ type: "LOGIN" });
     }
 
