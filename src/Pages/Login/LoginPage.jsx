@@ -5,7 +5,7 @@ import Button from "@mui/material/Button";
 import styles from "./LoginPage.module.css";
 
 const LoginPage = () => {
-  const { state, dispatch } = useContext(BookContext);
+  const { dispatch } = useContext(BookContext);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [responseData, setResponseData] = useState({});
@@ -64,7 +64,6 @@ const LoginPage = () => {
       } else {
         navigate("/");
       }
-      // console.log(location?.state?.from?.pathname);
       dispatch({ type: "LOGIN" });
     }
 

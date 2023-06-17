@@ -39,15 +39,6 @@ const AllProductsPage = () => {
     setSelectedCategories([]);
   };
 
-  // const handleCheckboxChange = (event) => {
-  //   const category = event.target.value;
-  //   if (event.target.checked) {
-  //     setSelectedCategories([...selectedCategories, category]);
-  //   } else {
-  //     setSelectedCategories(selectedCategories.filter((c) => c !== category));
-  //   }
-  // };
-
   return (
     <>
       <div
@@ -58,7 +49,6 @@ const AllProductsPage = () => {
       >
         <NavBar />
 
-        <h1 style={{ fontStyle: "italic", color: "#ededed" }}>All Books</h1>
         <div
           style={{
             display: "inline-block",

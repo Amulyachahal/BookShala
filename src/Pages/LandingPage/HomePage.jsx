@@ -14,14 +14,6 @@ const Home = () => {
     BookContext
   );
   const navigate = useNavigate();
-  const userToken = localStorage.getItem("encodedToken");
-
-  // useEffect(() => {
-  //   if (userToken) {
-  //     fetchCartData();
-  //     fetchWishlistData();
-  //   }
-  // }, []);
 
   return (
     <>
