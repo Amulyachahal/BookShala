@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import { useNavigate } from "react-router";
 import { BookContext } from "../../Contexts/BookContext";
@@ -10,8 +10,18 @@ import Button from "@mui/material/Button";
 import landingbgimage from "../../Images/BackgroundImage/landingbgimage.jpg";
 
 const Home = () => {
-  const { state, dispatch } = useContext(BookContext);
+  const { state, dispatch, fetchCartData, fetchWishlistData } = useContext(
+    BookContext
+  );
+  const userToken = localStorage.getItem("encodedToken");
+
   const navigate = useNavigate();
+  useEffect(() => {
+    if (userToken) {
+      fetchCartData();
+      fetchWishlistData();
+    }
+  }, []);
 
   return (
     <>
