@@ -27,9 +27,6 @@ export const DataReducer = (state, action) => {
       };
 
     case "SEARCH_CATEGORY":
-      //   const categoryData = state.categories.filter(
-      //     (category) => category.categoryName === action.payload
-      //   );
       const categoryBooks = state.books.filter(
         (book) => book.categoryName === action.payload
       );

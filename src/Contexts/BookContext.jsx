@@ -95,6 +95,7 @@ export const BookProvider = ({ children }) => {
         body: JSON.stringify(product),
       });
       const data = await response.json();
+      console.log(response._bodyText);
       dispatch({
         type: "ADD_TO_CART",
         payload_id: book._id,
